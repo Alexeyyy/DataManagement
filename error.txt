@@ -1,1 +1,3 @@
-!!!!
+Hello, my name is Alex. I am almost 20 years, have a birthday in April.
+My main hobby is programming. 
+Good bye.
