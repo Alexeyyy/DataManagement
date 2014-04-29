@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FundApp.Models.Section>
+
+@{
+    ViewBag.Title = "SectionsPage";
+}
+
+<h2>Секции</h2>
+
+<div class="search-block">
+     @using (Html.BeginForm("Search", "Sections", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+     {
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
+        <button type="submit" class="btn btn-default">Искать</button>
+     }
+</div>
+
+<div class="clear">
+</div>
+
+@if(Model.Count() != 0) {
+    <table class="table table-bordered table-striped table-condensed table-hover data-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Начало занятий</th>
+                <th>Число занятий</th>
+                <th>Свободные места</th>
+                <th>Преподаватель</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Title</td>
+                    <td>@s.Description</td>
+                    <td>@s.StartLessonsTime.ToShortDateString()</td>
+                    <td>@s.LessonsCount</td>
+                    <td>@s.FreeSpotsCount</td>
+                    <td>@s.Ecologist.Surname @s.Ecologist.Name @s.Ecologist.FatherName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>
+        Извините, вашему запросу не соответствуют никакие данные.   
+    </p>
+}

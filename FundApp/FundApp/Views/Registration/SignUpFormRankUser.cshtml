@@ -1,0 +1,133 @@
+﻿@model FundApp.Models.RegistrationViewModel
+
+@{
+    ViewBag.Title = "SignUpFormUser";
+}
+
+@*Регистрационная форма*@
+@using (Html.BeginForm("SignUpFormRankUser", "Registration", FormMethod.Post, null))
+{
+    <div class="form-elements-group">
+        <h2 class="registration-caption">
+            Заполните предложенную регистрационную форму (для пользователя)
+        </h2>
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше имя:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemRankUser.Name, new { @class = "form-control", placeholder = "Имя" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Name)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу фамилию:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemRankUser.Surname, new { @class = "form-control", placeholder = "Фамилия" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Surname)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше отчество:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n =>n.ItemRankUser.FatherName, new { @class = "form-control", placeholder = "Отчество" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.FatherName)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Укажите ваш пол:
+            </div>
+            <div class="form-element-self">
+                @Html.DropDownListFor(n => n.ItemRankUser.Sex, new [] {
+                                   new SelectListItem() {Text = "Мужской", Selected = true, Value = bool.TrueString},
+                                   new SelectListItem() {Text = "Женский", Selected = false, Value = bool.FalseString}
+                                  })    
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Sex)
+            </div>
+        </div>
+        
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу дату рождения:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemRankUser.BirthDate, new { @class = "form-control", placeholder = "Дата рождения (00.00.0000)" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.BirthDate)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте логин:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemRankUser.Login, new { @class = "form-control", placeholder = "Логин" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Login)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте пароль:
+            </div>
+            <div class="form-element-self">
+                @Html.PasswordFor(n => n.ItemRankUser.Password, new { @class = "form-control", placeholder = "Пароль" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Password)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите адрес электронной почты:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemRankUser.Email, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Email)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите информациюо себе:
+            </div>
+            <div class="form-element-self">
+                @Html.TextAreaFor(n => n.ItemRankUser.Information, new { @class = "form-control", placeholder = "Напишите о себе..." })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemRankUser.Information)
+            </div>
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    <button type="submit" class="registration-submit btn btn-default">Зарегистрироваться</button>
+}

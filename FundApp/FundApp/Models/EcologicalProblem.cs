@@ -11,19 +11,23 @@ namespace FundApp.Models
     {
         [Key]
         public int ProblemID { get; set; }
+        [Required]
         public string Description { get; set; }
 
         public string PhotoType { get; set; }
         public byte[] PhotoFile { get; set; }
 
         public decimal RequiredSum { get; set; }
+        
         public bool IsSolved { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public DateTime PublicationDate { get; set; }
 
         [Required]
         public virtual Complaint Complaint { get; set; }
         [Required]
-        public virtual Ecologist Ecologist { get; set; }
+        public virtual Ecologist Creator { get; set; }
     }
 }

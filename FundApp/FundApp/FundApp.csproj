@@ -161,17 +161,25 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AchievementsController.cs" />
+    <Compile Include="Controllers\EcologistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\ProblemsController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201404241937339_FundDB.cs" />
-    <Compile Include="Migrations\201404241937339_FundDB.Designer.cs">
-      <DependentUpon>201404241937339_FundDB.cs</DependentUpon>
+    <Compile Include="Migrations\201404291604550_2004.cs" />
+    <Compile Include="Migrations\201404291604550_2004.Designer.cs">
+      <DependentUpon>201404291604550_2004.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201404241944401_DbFix.cs" />
-    <Compile Include="Migrations\201404241944401_DbFix.Designer.cs">
-      <DependentUpon>201404241944401_DbFix.cs</DependentUpon>
+    <Compile Include="Migrations\201404291938257_2338.cs" />
+    <Compile Include="Migrations\201404291938257_2338.Designer.cs">
+      <DependentUpon>201404291938257_2338.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -182,6 +190,7 @@
     <Compile Include="Models\OrganisationDeptor.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnershipRequest.cs" />
+    <Compile Include="Models\RegistrationControllerModels.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -275,6 +284,7 @@
     <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -292,7 +302,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -304,21 +316,36 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_masterPage.cshtml" />
+    <Content Include="Views\Shared\Partners.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Registration\SignUpFormRankUser.cshtml" />
+    <Content Include="Views\Registration\SignUpFormEcologist.cshtml" />
+    <Content Include="Views\Registration\SignUpChoice.cshtml" />
+    <Content Include="Views\Registration\RegistrationResult.cshtml" />
+    <Content Include="Views\Partners\PartnersPage.cshtml" />
+    <Content Include="Views\Ecologists\EcologistsPage.cshtml" />
+    <Content Include="Views\Problems\ProblemsPage.cshtml" />
+    <Content Include="Views\Achievements\AchievementsPage.cshtml" />
+    <Content Include="Views\Sections\SectionsPage.cshtml" />
+    <Content Include="Views\Rooms\EcologistRoom.cshtml" />
+    <Content Include="Views\Rooms\AdministratorRoom.cshtml" />
+    <Content Include="Views\Rooms\UserRoom.cshtml" />
+    <Content Include="Views\Ecologists\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404241937339_FundDB.resx">
-      <DependentUpon>201404241937339_FundDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404291604550_2004.resx">
+      <DependentUpon>201404291604550_2004.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404241944401_DbFix.resx">
-      <DependentUpon>201404241944401_DbFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404291938257_2338.resx">
+      <DependentUpon>201404291938257_2338.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

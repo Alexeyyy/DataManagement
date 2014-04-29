@@ -23,7 +23,7 @@ namespace FundApp.Models
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Council> Councils { get; set; }
         public DbSet<EcologicalProblem> EcologicalProblems { get; set; }
-        public DbSet<OrganisationDeptor> OraganisationDeptors { get; set; }
+        public DbSet<OrganisationDeptor> OrganisationDeptors { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<PartnershipRequest> PartnershipRequests { get; set; }
         public DbSet<Section> Sections { get; set; }

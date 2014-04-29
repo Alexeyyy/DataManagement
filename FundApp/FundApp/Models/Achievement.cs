@@ -11,11 +11,12 @@ namespace FundApp.Models
     {
         [Key]
         public int AchievementID { get; set; }
-
         public string Description { get; set; }
-
         public string PhotoType { get; set; }
         public byte[] PhotoFile { get; set; }
+
+        [Required]
+        public string Title { get; set; }
 
         [Required]
         public virtual Administrator Administrator { get; set; }

@@ -1,0 +1,158 @@
+﻿@model FundApp.Models.RegistrationViewModel
+
+@{
+    ViewBag.Title = "SignUpFormEcologist";
+}
+
+<h2>
+    Заполните предложенную регистрационную форму (для эколога)
+</h2>
+
+@*Регистрационная форма*@
+@using (Html.BeginForm("SignUpFormEcologist", "Registration", FormMethod.Post, null))
+{
+    <div class="form-elements-group">
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше имя:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.Name, new { @class = "form-control", placeholder = "Имя" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Name)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу фамилию:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.Surname, new { @class = "form-control", placeholder = "Фамилия" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Surname)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше отчество:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n =>n.ItemEcologist.FatherName, new { @class = "form-control", placeholder = "Отчество" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.FatherName)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Укажите ваш пол:
+            </div>
+            <div class="form-element-self">
+                @Html.DropDownListFor(n => n.ItemEcologist.Sex, new [] {
+                                   new SelectListItem() {Text = "Мужской", Selected = true, Value = bool.TrueString},
+                                   new SelectListItem() {Text = "Женский", Selected = false, Value = bool.FalseString}
+                                  })    
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Sex)
+            </div>
+        </div>
+        
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу дату рождения:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.BirthDate, new { @class = "form-control", placeholder = "Дата рождения (00.00.0000)" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.BirthDate)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте логин:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.Login, new { @class = "form-control", placeholder = "Логин" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Login)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте пароль:
+            </div>
+            <div class="form-element-self">
+                @Html.PasswordFor(n => n.ItemEcologist.Password, new { @class = "form-control", placeholder = "Пароль" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Password)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите адрес электронной почты:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.Email, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Email)
+            </div>
+        </div>
+        
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите данные об образовании:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.Education, new { @class = "form-control", placeholder = "Университет, колледж и т.п." })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.Education)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите сферу интересов:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.InterestsSphere, new { @class = "form-control", placeholder = "Сфера деятельности" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.InterestsSphere)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше местоположение:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemEcologist.DistrictLocation, new { @class = "form-control", placeholder = "Местоположение" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemEcologist.DistrictLocation)
+            </div>
+        </div>
+
+        <button type="submit" class="registration-submit btn btn-default">Зарегистрироваться</button>
+
+    </div>
+}
+    

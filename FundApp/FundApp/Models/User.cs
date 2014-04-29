@@ -12,18 +12,25 @@ namespace FundApp.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Surname { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string FatherName { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public bool Sex { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public DateTime BirthDate { get; set; }
         public DateTime RegistrationDate { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Login { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Email { get; set; }
     }
-
-
+    
     [Table("RankUsers")]
     public class RankUser : User
     {
@@ -45,6 +52,7 @@ namespace FundApp.Models
     public class Ecologist : User
     {
         public string InterestsSphere { get; set; }
+        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Education { get; set; }
         public string DistrictLocation { get; set; }
 
@@ -59,5 +67,15 @@ namespace FundApp.Models
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<Achievement> Achievements { get; set; }
+    }
+
+    public class Partner:User
+    {
+        public string Address { get; set; }
+        public string CompanyName { get; set; }
+        public string Description { get; set; }
+        
+        public virtual ICollection<Complaint> Complaints { get; set; }
+        public virtual PartnershipRequest PartnershipRequest { get; set; }
     }
 }

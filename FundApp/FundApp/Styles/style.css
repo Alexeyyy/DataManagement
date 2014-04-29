@@ -67,8 +67,6 @@ nav
 .nav-ul
 {
     width: 1000px;
-    font: bold 14pt Arial serif;
-    color: #ffffff;
     height: 55px;
     border-radius: 10px 10px 0 0;
     background: url('../Images/nav/nav-bg.png') repeat;
@@ -89,6 +87,25 @@ nav
     .nav-li:hover
     {
         background-color: #323233;
+    }
+
+.nav-link
+{
+    color: #ffffff;
+    text-decoration: none;
+    font: bold 14pt Arial serif;
+}
+
+    .nav-link:hover
+    {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .nav-link:active
+    {
+        color: #ffffff;
+        text-decoration: none;
     }
 
 .bottom-stripe
@@ -203,6 +220,7 @@ nav
     width: 1000px;
     height: 400px;
     margin: 20px auto;
+    padding-bottom: 150px;
 }
 
 .fund-preview
@@ -274,6 +292,9 @@ nav
 {
     background: url('../Images/footer/footer_bg.jpg') repeat;
     margin: 20px 0 0 0;
+    position: relative;
+    bottom: 0;
+    
 }
 
 footer
@@ -306,3 +327,71 @@ footer
         color: #ffffff;
     }
 /*FOOTER*/
+
+.renderer-block
+{
+    width: 1000px;
+    margin: 50px auto;
+}
+
+/*Form styles*/
+.form-elements-group
+{
+    margin: 40px auto;
+    width: 1000px;
+}
+
+.form-element
+{
+    height: 35px;
+    margin: 10px 0;
+}
+
+.form-element-title
+{
+    font: noraml 20px Arial serif;
+    padding: 0 0 20px 0;
+    width: 300px;
+    float: left;
+}
+
+.form-element-self
+{
+    width: 300px;
+    float: left;
+}
+
+.form-element-message
+{
+    float: left;
+    padding: 5px 0 0 10px;
+    text-align: center;
+}
+
+textarea
+{
+    resize: none;
+}
+
+.registration-submit
+{
+    margin: 10px 0 0 0;
+}
+
+.registration-caption
+{
+    margin: 15px 0;
+}
+
+.form-message
+{
+    float: left;
+    padding: 5px;
+    color: #ff4444;
+    font: normal 20px Arial serif; 
+}
+
+.data-table th 
+{
+    text-align: center;
+}

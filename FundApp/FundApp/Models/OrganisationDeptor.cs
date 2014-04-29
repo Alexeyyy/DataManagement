@@ -10,15 +10,18 @@ namespace FundApp.Models
     {
         [Key]
         public int OrganisationDeptorID { get; set; }
+        [Required]
         public string Reason { get; set; }
+        [Required]
         public decimal FineAmount { get; set; }
+        [Required]
         public DateTime PayTime { get; set; }
+        [Required]
         public bool IsPayed { get; set; }
-        public string Email { get; set; }
-
         [Required]
         public virtual Complaint Complaint { get; set; }
-        [Required]
-        public virtual Secretary Secretary { get; set; }
+        
+        public virtual Secretary ResponsiblePerson { get; set; }
+        public string Email { get; set; }
     }
 }

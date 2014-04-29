@@ -11,16 +11,15 @@ namespace FundApp.Models
     {
         [Key]
         public int ComplaintID { get; set; }
+        [Required]
         public DateTime AppearingDate { get; set; }
+        [Required]
         public string Description { get; set; }
-
-        //[Required]
-        //public virtual RankUser User { get; set; }
         [Required]
-        public virtual Partner Partner { get; set; }
+        public string Title { get; set; }
         [Required]
-        public virtual Ecologist Ecologist { get; set; }
-
+        public virtual User Creator { get; set; }
+        
         public virtual OrganisationDeptor OrganisationDeptor { get; set; }
         public virtual EcologicalProblem EcologicalProblem { get; set; }
     }

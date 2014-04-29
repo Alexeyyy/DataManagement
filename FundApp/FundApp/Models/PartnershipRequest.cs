@@ -17,7 +17,6 @@ namespace FundApp.Models
         [Required]
         public virtual Secretary Secretary { get; set; }
         [Required]
-        public virtual RankUser RankUser { get; set; }
         public virtual Partner Partner { get; set; }
     }
 }

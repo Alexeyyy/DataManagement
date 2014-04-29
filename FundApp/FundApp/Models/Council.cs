@@ -11,9 +11,12 @@ namespace FundApp.Models
     {
         [Key]
         public int CouncilID { get; set; }
+        [Required]
         public DateTime AssignmentDate { get; set; }
         
+        [Required]
         public bool CounsilResult { get; set; }
+        [Required]
         public string Description { get; set; }
 
         [Required]
