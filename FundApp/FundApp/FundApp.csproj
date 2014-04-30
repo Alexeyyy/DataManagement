@@ -181,6 +181,22 @@
     <Compile Include="Migrations\201404291938257_2338.Designer.cs">
       <DependentUpon>201404291938257_2338.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404301909135_2309.cs" />
+    <Compile Include="Migrations\201404301909135_2309.Designer.cs">
+      <DependentUpon>201404301909135_2309.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404302019576_0019.cs" />
+    <Compile Include="Migrations\201404302019576_0019.Designer.cs">
+      <DependentUpon>201404302019576_0019.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404302029242_0029.cs" />
+    <Compile Include="Migrations\201404302029242_0029.Designer.cs">
+      <DependentUpon>201404302029242_0029.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404302037455_0037.cs" />
+    <Compile Include="Migrations\201404302037455_0037.Designer.cs">
+      <DependentUpon>201404302037455_0037.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Achievement.cs" />
     <Compile Include="Models\Complaint.cs" />
@@ -332,6 +348,7 @@
     <Content Include="Views\Rooms\AdministratorRoom.cshtml" />
     <Content Include="Views\Rooms\UserRoom.cshtml" />
     <Content Include="Views\Ecologists\Edit.cshtml" />
+    <Content Include="Views\Registration\SignUpFormPartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,6 +363,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404291938257_2338.resx">
       <DependentUpon>201404291938257_2338.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301909135_2309.resx">
+      <DependentUpon>201404301909135_2309.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404302019576_0019.resx">
+      <DependentUpon>201404302019576_0019.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404302029242_0029.resx">
+      <DependentUpon>201404302029242_0029.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404302037455_0037.resx">
+      <DependentUpon>201404302037455_0037.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

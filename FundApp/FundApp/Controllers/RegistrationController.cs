@@ -70,5 +70,29 @@ namespace FundApp.Controllers
             }
         }
         #endregion
+
+        #region Для партнера
+        public ActionResult SignUpFormPartner()
+        {
+            return View();
+        }
+
+        [HttpPost] 
+        public ActionResult SignUpFormPartner(RegistrationViewModel registeredPartner)
+        {
+            if (ModelState.IsValid)
+            {
+                Debug.WriteLine(registeredPartner.ItemPartner.Name);
+                Debug.WriteLine(registeredPartner.ItemPartnershipRequest.Reason);
+
+            }
+            else
+            {
+                Debug.WriteLine("Wrong");
+            }
+            
+            return View();
+        }
+        #endregion
     }
 }

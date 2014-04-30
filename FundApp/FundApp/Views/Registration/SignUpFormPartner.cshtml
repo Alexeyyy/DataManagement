@@ -1,0 +1,175 @@
+﻿@model FundApp.Models.RegistrationViewModel
+
+@{
+    ViewBag.Title = "SignUpFormPartner";
+}
+
+@*Регистрационная форма*@
+@using (Html.BeginForm("SignUpFormPartner", "Registration", FormMethod.Post, null))
+{
+    <div class="form-elements-group">
+        <h2 class="registration-caption">
+            Заполните предложенную регистрационную форму (для партнера)
+        </h2>
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше имя:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.Name, new { @class = "form-control", placeholder = "Имя" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Name)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу фамилию:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.Surname, new { @class = "form-control", placeholder = "Фамилия" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Surname)
+            </div>
+        </div>
+    
+        <div class="clear"></div>
+    
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите ваше отчество:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n =>n.ItemPartner.FatherName, new { @class = "form-control", placeholder = "Отчество" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.FatherName)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Укажите ваш пол:
+            </div>
+            <div class="form-element-self">
+                @Html.DropDownListFor(n => n.ItemPartner.Sex, new [] {
+                                   new SelectListItem() {Text = "Мужской", Selected = true, Value = bool.TrueString},
+                                   new SelectListItem() {Text = "Женский", Selected = false, Value = bool.FalseString}
+                                  })    
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Sex)
+            </div>
+        </div>
+        
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите вашу дату рождения:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.BirthDate, new { @class = "form-control", placeholder = "Дата рождения (00.00.0000)" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.BirthDate)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте логин:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.Login, new { @class = "form-control", placeholder = "Логин" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Login)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Придумайте пароль:
+            </div>
+            <div class="form-element-self">
+                @Html.PasswordFor(n => n.ItemPartner.Password, new { @class = "form-control", placeholder = "Пароль" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Password)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите адрес электронной почты:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.Email, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Email)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите название компании:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.CompanyName, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.CompanyName)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите адрес компании:
+            </div>
+            <div class="form-element-self">
+                @Html.TextBoxFor(n => n.ItemPartner.Address, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Address)
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите описание компании:
+            </div>
+            <div class="form-element-self">
+                @Html.TextAreaFor(n => n.ItemPartner.Description, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartner.Description)
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+
+        @*<h2>Заявка</h2>
+
+        <div class="form-element">
+            <div class="form-element-title">
+                Введите причину подачи заявки:
+            </div>
+            <div class="form-element-self">
+                @Html.TextAreaFor(n => n.ItemPartnershipRequest.Reason, new { @class = "form-control", placeholder = "Напишите причину, согласно которой вы хотите подать заявку на сотрудничество..." })
+            </div>
+            <div class="form-element-message">
+                @Html.ValidationMessageFor(n => n.ItemPartnershipRequest.Reason)
+            </div>
+        </div>*@
+
+    </div>
+    
+    <div class="clear"></div>
+    
+    <button type="submit" class="registration-submit btn btn-default">Подать заявку</button>
+}

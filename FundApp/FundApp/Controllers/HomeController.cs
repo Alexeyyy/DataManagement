@@ -15,8 +15,6 @@ namespace FundApp.Controllers
         
         public ActionResult Index()
         {
-            int i = context.Achivements.Count();
-
             return View();
         }
     }

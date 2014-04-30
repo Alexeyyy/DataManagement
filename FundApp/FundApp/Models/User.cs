@@ -44,7 +44,7 @@ namespace FundApp.Models
     {
         public string IndividualTaxNumber { get; set; }
 
-        public virtual ICollection<PartnershipRequest> PartnershipRequests { get; set; }
+        //public virtual ICollection<PartnershipRequest> PartnershipRequests { get; set; }
         public virtual ICollection<OrganisationDeptor> OrganisationDeptors { get; set; }
     }
 
@@ -71,8 +71,11 @@ namespace FundApp.Models
 
     public class Partner:User
     {
+        [Required(ErrorMessage = "Введите адрес компании")]
         public string Address { get; set; }
+        [Required(ErrorMessage="Введите название компании")]
         public string CompanyName { get; set; }
+        [Required(ErrorMessage = "Введите описание")]
         public string Description { get; set; }
         
         public virtual ICollection<Complaint> Complaints { get; set; }

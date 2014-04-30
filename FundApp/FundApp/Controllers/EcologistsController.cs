@@ -20,8 +20,8 @@ namespace FundApp.Controllers
         }
 
         //Поиск по экологам
-        [HttpPost]
-        public ActionResult Search(string searchString)
+        [HttpGet]
+        public ActionResult EcologistsPage(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString)) {
                 return View("EcologistsPage", db.Ecologists);
@@ -29,7 +29,7 @@ namespace FundApp.Controllers
                      
             return View("EcologistsPage", db.Ecologists.Where(n => (n.Name.Contains(searchString) || n.Surname.Contains(searchString) 
                         || n.InterestsSphere.Contains(searchString) || n.FatherName.Contains(searchString)
-                        || n.DistrictLocation.Contains(searchString) || n.Education.Contains(searchString))));
+                        || n.DistrictLocation.Contains(searchString) || n.Education.Contains(searchString) || n.Email.Contains(searchString))));
         }
 
         public ActionResult Delete(int id)

@@ -1,5 +1,61 @@
-﻿@{
+﻿@model IEnumerable<FundApp.Models.Achievement>
+
+@{
     ViewBag.Title = "AchievementsPage";
 }
 
-<h2>AchievementsPage</h2>
+
+<h2>Достижения</h2>
+
+<div class="search-block">
+     @using (Html.BeginForm("AchievementsPage", "Achievements", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     {
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
+        <button type="submit" class="btn btn-default">Искать</button>
+     }
+</div>
+
+<div class="clear">
+</div>
+
+@if(Model.Count() != 0) {
+    <table class="table table-bordered table-striped table-condensed table-hover data-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Решена</th>
+                <th>Фото</th>
+                @if(Session["Role"] == "Administrator") {
+                    <th>Опубликовано</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.Title</td>
+                    <td>@a.Description</td>
+                    <td>@a.EcologicalProblem.Title</td>
+                    <td>
+                        @if(a.PhotoFile != null) {
+                            @a.PhotoFile
+                        } else {
+                            <span>Нет фото</span>
+                        }
+                    </td>
+                    @if(Session["Role"] == "Administrator") {
+                        <td>
+                            @a.Administrator.Surname @a.Administrator.Name @a.Administrator.FatherName
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>
+        Извините, вашему запросу не соответствуют никакие данные.   
+    </p>
+}

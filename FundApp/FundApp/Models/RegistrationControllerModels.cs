@@ -9,6 +9,8 @@ namespace FundApp.Models
     {
         public Ecologist ItemEcologist { get; set; }
         public RankUser ItemRankUser { get;set; }
+        public PartnershipRequest ItemPartnershipRequest { get; set; }
+        public Partner ItemPartner { get; set; }
         public User ItemUser { get; set; }
     }
 }

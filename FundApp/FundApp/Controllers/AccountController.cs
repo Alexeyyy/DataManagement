@@ -57,6 +57,12 @@ namespace FundApp.Controllers
                         Session.Add("Role", "Secretary");
                         Session.Add("Greeting", "Добро пожаловать! Секретарь " + user.Name + " " + user.Surname);
                     }
+
+                    if (user is Partner)
+                    {
+                        Session.Add("Role", "Partner");
+                        Session.Add("Greeting", "Добро пожаловать! Партнер " + user.Name + " " + user.Surname);
+                    }
                     
                     Session.Add("ErrorLogin", false);
                 }

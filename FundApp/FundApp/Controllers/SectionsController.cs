@@ -16,18 +16,28 @@ namespace FundApp.Controllers
             return View(db.Sections.ToList());
         }
 
-        [HttpPost]
-        public ActionResult Search(string searchString)
+        [HttpGet]
+        public ActionResult SectionsPage(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                return View("SectionsPage", db.Sections.ToList());
+                return View(db.Sections.ToList());
             }
+            
+            int lessonsCount;
+            int freeSpots;
+            DateTime d;
 
-            List<Section> sections = db.Sections.Where(n => (n.Title.Contains(searchString) || n.Description.Contains(searchString) || n.Ecologist.Name.Contains(searchString) || n.Ecologist.Surname.Contains(searchString) || n.Ecologist.FatherName.Contains(searchString))).ToList();
+            Int32.TryParse(searchString, out lessonsCount);
+            Int32.TryParse(searchString, out freeSpots);
+            DateTime.TryParse(searchString, out d);
+                       
+            List<Section> sections = db.Sections.Where(n => (n.Title.Contains(searchString) || n.Description.Contains(searchString) 
+                                                        || n.Ecologist.Name.Contains(searchString) || n.Ecologist.Surname.Contains(searchString) 
+                                                        || n.Ecologist.FatherName.Contains(searchString) || n.LessonsCount == lessonsCount
+                                                        || n.FreeSpotsCount == freeSpots || (n.StartLessonsTime.Year == d.Year && n.StartLessonsTime.Month == d.Month && n.StartLessonsTime.Day == d.Day))).ToList();
 
-            return View("SectionsPage", sections);
+            return View(sections);
         }
-
     }
 }

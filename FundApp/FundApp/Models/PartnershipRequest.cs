@@ -11,11 +11,11 @@ namespace FundApp.Models
     {
         [Key]
         public int RequestID { get; set; }
-        public int Description { get; set; }
+        public string Reason { get; set; }
         public bool IsAccepted { get; set; }
 
-        [Required]
-        public virtual Secretary Secretary { get; set; }
+        //[Required]
+        public Secretary Secretary { get; set; }
         [Required]
         public virtual Partner Partner { get; set; }
     }
