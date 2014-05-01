@@ -15,6 +15,14 @@ namespace FundApp.Controllers
         
         public ActionResult Index()
         {
+            foreach (var e in context.EcologicalProblems)
+                Debug.WriteLine(e.ProblemID);
+
+            Debug.WriteLine("================================");
+
+            foreach (var a in context.Achivements)
+                Debug.WriteLine(a.AchievementID);
+
             return View();
         }
     }

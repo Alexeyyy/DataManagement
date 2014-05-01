@@ -15,8 +15,8 @@ namespace FundApp.Models
         public bool IsAccepted { get; set; }
 
         //[Required]
-        public Secretary Secretary { get; set; }
-        [Required]
-        public virtual Partner Partner { get; set; }
+        //public Secretary Secretary { get; set; }
+        //[Required]
+        //public virtual Partner Partner { get; set; }
     }
 }

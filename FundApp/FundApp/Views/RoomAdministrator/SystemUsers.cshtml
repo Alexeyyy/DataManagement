@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FundApp.Models.User>
+
+@{
+    ViewBag.Title = "EditSystemUsers";
+}
+
+<h2>Редактировать пользователей</h2>
+
+<div class="search-block">
+     @using (Html.BeginForm("EditSystemUsers", "Rooms", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     {
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
+        <button type="submit" class="btn btn-default">Искать</button>
+     }
+</div>
+
+<div class="clear">
+</div>
+
+@if(Model.Count() != 0) {
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Дата рождения</th>
+                <th>Email</th>
+                <th>Роль</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>
+                        @u.Name @u.Surname @u.FatherName
+                    </td>
+                    <td>
+                        @u.BirthDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @u.Email
+                    </td>
+                    <td>
+                        @if (u.GetType().ToString().Contains("Administrator"))
+                        {
+                            <span>Администратор</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Ecologist"))
+                        {
+                            <span>Эколог</span>
+                        }
+                        @if (u.GetType().ToString().Contains("RankUser"))
+                        {
+                            <span>Пользователь</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Partner"))
+                        {
+                            <span>Партнер</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Secretary"))
+                        {
+                            <span>Секретарь</span>
+                        }
+                    </td>
+                    <td>
+                        @u.Login
+                    </td>
+                    <td>
+                        @u.Password
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удаление", "DeleteUser", new { id = u.ID})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>
+        Извините, вашему запросу не соответствуют никакие данные.   
+    </p>
+}
+
+@Html.ActionLink("Добавить нового пользователя", "AddNewUser", null, null)

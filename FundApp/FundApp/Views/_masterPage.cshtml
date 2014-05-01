@@ -164,28 +164,28 @@
                     @if(Session["Role"] != null) {
                         if (Session["Role"] == "Administrator") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "Rooms", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "Secretary") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "Rooms", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "Ecologist") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "Rooms", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "User") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "UserRoom", "Rooms", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "UserRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "Partner")
                         {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "Rooms", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
                             </li>
                         }
                     }

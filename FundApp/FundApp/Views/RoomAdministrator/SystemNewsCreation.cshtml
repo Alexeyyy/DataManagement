@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FundApp.Models.EcologicalProblem>
+
+@{
+    ViewBag.Title = "AddNews";
+}
+
+<h2>Создание новостей по решенным проблемам</h2>
+
+
+@if (Model.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>Проблема</th>
+                <th>Состояние</th>
+                <th>Запись о достижении</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Title</td>
+                    <td>
+                        @if (p.IsSolved)
+                        {
+                            <span>Решена</span>
+                        }
+                        else
+                        {
+                            <span>В разработке</span>                            
+                        }
+                    </td>
+
+                    <td>
+                        @if (p.Achievement == null)
+                        {
+                            @Html.ActionLink("Создать", "CreateNews", new { id = p.ProblemID })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Редактировать", "EditNews", new { id = p.ProblemID })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        Извините, вашему запросу не соответствуют никакие данные.   
+    </p>
+}
+
+

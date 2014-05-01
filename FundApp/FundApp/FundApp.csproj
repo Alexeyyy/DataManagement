@@ -168,45 +168,29 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\ProblemsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\RoomAdministratorController.cs" />
+    <Compile Include="Controllers\RoomEcologistController.cs" />
+    <Compile Include="Controllers\RoomPartnerController.cs" />
+    <Compile Include="Controllers\RoomSecretaryController.cs" />
+    <Compile Include="Controllers\RoomUserController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201404291604550_2004.cs" />
-    <Compile Include="Migrations\201404291604550_2004.Designer.cs">
-      <DependentUpon>201404291604550_2004.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404291938257_2338.cs" />
-    <Compile Include="Migrations\201404291938257_2338.Designer.cs">
-      <DependentUpon>201404291938257_2338.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404301909135_2309.cs" />
-    <Compile Include="Migrations\201404301909135_2309.Designer.cs">
-      <DependentUpon>201404301909135_2309.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404302019576_0019.cs" />
-    <Compile Include="Migrations\201404302019576_0019.Designer.cs">
-      <DependentUpon>201404302019576_0019.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404302029242_0029.cs" />
-    <Compile Include="Migrations\201404302029242_0029.Designer.cs">
-      <DependentUpon>201404302029242_0029.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201404302037455_0037.cs" />
-    <Compile Include="Migrations\201404302037455_0037.Designer.cs">
-      <DependentUpon>201404302037455_0037.cs</DependentUpon>
+    <Compile Include="Migrations\201405011955360_2355.cs" />
+    <Compile Include="Migrations\201405011955360_2355.Designer.cs">
+      <DependentUpon>201405011955360_2355.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Achievement.cs" />
+    <Compile Include="Models\ViewModels\AddNewModel.cs" />
     <Compile Include="Models\Complaint.cs" />
     <Compile Include="Models\EcologicalProblem.cs" />
     <Compile Include="Models\Council.cs" />
     <Compile Include="Models\FundContext.cs" />
     <Compile Include="Models\OrganisationDeptor.cs" />
-    <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnershipRequest.cs" />
-    <Compile Include="Models\RegistrationControllerModels.cs" />
+    <Compile Include="Models\ViewModels\RegistrationControllerModels.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -344,37 +328,31 @@
     <Content Include="Views\Problems\ProblemsPage.cshtml" />
     <Content Include="Views\Achievements\AchievementsPage.cshtml" />
     <Content Include="Views\Sections\SectionsPage.cshtml" />
-    <Content Include="Views\Rooms\EcologistRoom.cshtml" />
-    <Content Include="Views\Rooms\AdministratorRoom.cshtml" />
-    <Content Include="Views\Rooms\UserRoom.cshtml" />
+    <Content Include="Views\RoomEcologist\EcologistRoom.cshtml" />
+    <Content Include="Views\RoomAdministrator\AdministratorRoom.cshtml" />
+    <Content Include="Views\RoomUser\UserRoom.cshtml" />
     <Content Include="Views\Ecologists\Edit.cshtml" />
     <Content Include="Views\Registration\SignUpFormPartner.cshtml" />
+    <Content Include="Views\RoomAdministrator\SystemUsers.cshtml" />
+    <Content Include="Views\RoomAdministrator\SystemNewsCreation.cshtml" />
+    <Content Include="Views\RoomAdministrator\CreateNews.cshtml" />
+    <Content Include="Views\RoomAdministrator\EditNews.cshtml" />
+    <Content Include="Views\RoomAdministrator\SystemSections.cshtml" />
+    <Content Include="Views\RoomAdministrator\CreateSection.cshtml" />
+    <Content Include="Views\RoomAdministrator\EditSection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
+    <Folder Include="Views\RoomPartner\" />
+    <Folder Include="Views\RoomSecretary\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201404291604550_2004.resx">
-      <DependentUpon>201404291604550_2004.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404291938257_2338.resx">
-      <DependentUpon>201404291938257_2338.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404301909135_2309.resx">
-      <DependentUpon>201404301909135_2309.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404302019576_0019.resx">
-      <DependentUpon>201404302019576_0019.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404302029242_0029.resx">
-      <DependentUpon>201404302029242_0029.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201404302037455_0037.resx">
-      <DependentUpon>201404302037455_0037.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405011955360_2355.resx">
+      <DependentUpon>201405011955360_2355.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

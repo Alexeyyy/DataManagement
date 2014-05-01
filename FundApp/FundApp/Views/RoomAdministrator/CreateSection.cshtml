@@ -1,0 +1,71 @@
+﻿@model FundApp.Models.Section
+
+@{
+    ViewBag.Title = "CreateSection";
+}
+
+<h2>Создание секции</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Section</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartLessonsTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartLessonsTime)
+            @Html.ValidationMessageFor(model => model.StartLessonsTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpotsCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpotsCount)
+            @Html.ValidationMessageFor(model => model.SpotsCount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LessonsCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LessonsCount)
+            @Html.ValidationMessageFor(model => model.LessonsCount)
+        </div>
+
+        <div class="editor-label">
+            Преподаватель
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ecologistID", (SelectListItem[])ViewBag.ecologists)  
+        </div>
+        
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Вернуться", "SystemSections")
+</div>
+

@@ -30,5 +30,13 @@ namespace FundApp.Models
         {
             FreeSpotsCount = SpotsCount - ParticipantsCount;
         }
+
+        public void CalculateParticipantsCount()
+        {
+            if (Participants != null)
+                ParticipantsCount = Participants.Count();
+            else
+                ParticipantsCount = 0;
+        }
     }
 }

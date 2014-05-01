@@ -49,7 +49,7 @@ namespace FundApp.Controllers
             return RedirectToAction("EcologistsPage");
         }
 
-        /**/
+        
         public ActionResult Edit(int id)
         {
             return View(db.Ecologists.Find(id));

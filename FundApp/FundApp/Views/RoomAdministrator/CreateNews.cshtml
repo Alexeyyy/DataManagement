@@ -1,0 +1,39 @@
+﻿@model FundApp.Models.Achievement
+
+@{
+    ViewBag.Title = "CreateNews";
+}
+
+<h2>CreateNews</h2>
+
+@using (Html.BeginForm()) {
+    @Html.Hidden("ecologicalProblemID", (object)ViewBag.problemID)
+    @Html.ValidationSummary(false)
+
+    <fieldset>
+        <legend>Achievement</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Вернуться", "SystemNewsCreation")
+</div>

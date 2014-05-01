@@ -55,17 +55,17 @@ namespace FundApp.Migrations
 
             db.Partners.AddOrUpdate(
                 n => n.CompanyName,
-                new Partner { Name = "Анна", Surname = "Голобокова", FatherName = "Андреевна", Sex = false, Email = "golobokova_ann@gmail.ru", Login = "ann", Password = "ann", BirthDate = DateTime.Now.AddYears(-20), RegistrationDate = DateTime.Now, CompanyName = "AnnCompanyGroup", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе." }
+                new Partner { Name = "Анна", Surname = "Голобокова", FatherName = "Андреевна", Sex = false, Email = "golobokova_ann@gmail.ru", Login = "ann", Password = "ann", BirthDate = DateTime.Now.AddYears(-20), RegistrationDate = DateTime.Now, CompanyName = "AnnCompanyGroup", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе.", Reason = "Хотим сделать мир лучше. Мы очень богатые", IsSolved = true, Secretary = db.Secretaries.First(n => n.Surname == "Прохоров") }
             );
 
             db.SaveChanges();
 
-            db.PartnershipRequests.AddOrUpdate(
+            /*db.PartnershipRequests.AddOrUpdate(
                 n => n.Reason,
                 new PartnershipRequest { Reason = "Хотим присоединиться к вашему фонду и сотрудничать вместе. Мы очень богатые.", IsAccepted = true, Partner = db.Partners.First(n => n.CompanyName == "AnnCompanyGroup"), Secretary = db.Secretaries.First(n => n.Surname == "Прохоров") }
             );
 
-            db.SaveChanges();
+            db.SaveChanges();*/
 
             db.Complaints.AddOrUpdate(
                 n => n.Title,
@@ -84,7 +84,7 @@ namespace FundApp.Migrations
                 new EcologicalProblem { Title = "Загрязнение озера Байкал", Description = "Проблема загрязнения озера Байкал. Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов.", RequiredSum = 2000000, IsSolved = false, PublicationDate = DateTime.Now.AddYears(-3), PhotoFile = null, PhotoType = string.Empty, Creator = db.Ecologists.First(n => n.Surname == "Ефимов"), Complaint = db.Complaints.First(n => n.Title == "Загрязнение озера Байкал") },
                 new EcologicalProblem { Title = "Лесные пожары на Алтае", Description = "Проблема лесных пожаров. Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов.", RequiredSum = 2000000, IsSolved = true, PublicationDate = DateTime.Now.AddYears(-3), PhotoFile = null, PhotoType = string.Empty, Creator = db.Ecologists.First(n => n.Surname == "Ефимов"), Complaint = db.Complaints.First(n => n.Title == "Лесные пожары на Алтае") },
                 new EcologicalProblem { Title = "Лесные пожары в Сибири", Description = "Лесной пожар в Сибири. Срочно требуется помощи фонда \"Слон\". Идем на помощь", RequiredSum = 100000000, IsSolved = true, PublicationDate = DateTime.Now.AddYears(-1), PhotoFile = null, PhotoType = string.Empty, Creator = db.Ecologists.First(n => n.Surname == "Смеречинский"), Complaint = db.Complaints.First(n => n.Title == "Лесные пожары в Сибири")}
-                );
+            );
 
             db.SaveChanges();
 
@@ -107,7 +107,8 @@ namespace FundApp.Migrations
             db.Achivements.AddOrUpdate(
                 n => n.Title,
                 new Achievement { Title = "Пожар в Сибири потушен!", Description = "При непосредственной поддержке фонда был потушен большой пожар в Сибирских лесах. Фонд удостоился правительственной награды.", EcologicalProblem = db.EcologicalProblems.First(n => n.Title == "Лесные пожары в Сибири"), Administrator = db.Administrators.First(), PhotoFile = null, PhotoType = string.Empty },
-                new Achievement { Title = "Пожар на Алтае потушен!", Description = "При непосредственной поддержке фонда был потушен большой пожар в Алтайских лесах. Фонд удостоился правительственной награды.", EcologicalProblem = db.EcologicalProblems.First(n => n.Title == "Лесные пожары на Алтае"), Administrator = db.Administrators.First(n => n.Surname == "Моисеев"), PhotoFile = null, PhotoType = string.Empty }
+                new Achievement { Title = "Пожар на Алтае потушен!", Description = "При непосредственной поддержке фонда был потушен большой пожар в Алтайских лесах. Фонд удостоился правительственной награды.", EcologicalProblem = db.EcologicalProblems.First(n => n.Title == "Лесные пожары на Алтае"), Administrator = db.Administrators.First(n => n.Surname == "Моисеев"), PhotoFile = null, PhotoType = string.Empty },
+                new Achievement { Title = "Река Амур!", Description = "При непосредственной поддержке фонда был потушен большой пожар в Алтайских лесах. Фонд удостоился правительственной награды.", EcologicalProblem = db.EcologicalProblems.First(n => n.Title == "Загрязнение реки Амур"), Administrator = db.Administrators.First(n => n.Surname == "Моисеев"), PhotoFile = null, PhotoType = string.Empty }
             );
 
             db.SaveChanges();
@@ -115,13 +116,6 @@ namespace FundApp.Migrations
             db.Complaints.AddOrUpdate(
                 n => n.Title,
                 new Complaint { Title = "Жалоба1", AppearingDate = DateTime.Now, Creator = db.Ecologists.First(), Description = "description1111" }
-            );
-
-            db.SaveChanges();
-
-            db.Achivements.AddOrUpdate(
-                n => n.Title,
-                new Achievement { Administrator = db.Administrators.First(), EcologicalProblem = db.EcologicalProblems.First(), Title = "Достижение1", Description = "gfhjsdgfjsgjfghsdjfjsdgfjsdgfhsdjfgsdjf sd f sdf sd f ds f sd f sd f" }
             );
 
             db.SaveChanges();

@@ -29,5 +29,8 @@ namespace FundApp.Models
         public virtual Complaint Complaint { get; set; }
         [Required]
         public virtual Ecologist Creator { get; set; }
+        
+        public virtual Achievement Achievement { get; set; }
+
     }
 }

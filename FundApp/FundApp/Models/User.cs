@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Web;
 
@@ -12,23 +13,32 @@ namespace FundApp.Models
     {
         [Key]
         public int ID { get; set; }
+
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Name { get; set; }
+        
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Surname { get; set; }
+        
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string FatherName { get; set; }
+        
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public bool Sex { get; set; }
+        
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public DateTime BirthDate { get; set; }
-        public DateTime RegistrationDate { get; set; }
+
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Login { get; set; }
+
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Email { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
     }
     
     [Table("RankUsers")]
@@ -45,15 +55,17 @@ namespace FundApp.Models
         public string IndividualTaxNumber { get; set; }
 
         //public virtual ICollection<PartnershipRequest> PartnershipRequests { get; set; }
+        public virtual ICollection<Partner> Partners { get; set; }
         public virtual ICollection<OrganisationDeptor> OrganisationDeptors { get; set; }
     }
 
     [Table("Ecologists")]
     public class Ecologist : User
     {
-        public string InterestsSphere { get; set; }
         [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
         public string Education { get; set; }
+
+        public string InterestsSphere { get; set; }
         public string DistrictLocation { get; set; }
 
         public virtual ICollection<Section> Sections { get; set; }
@@ -69,16 +81,27 @@ namespace FundApp.Models
         public virtual ICollection<Achievement> Achievements { get; set; }
     }
 
-    public class Partner:User
+    public class Partner : User
     {
         [Required(ErrorMessage = "Введите адрес компании")]
         public string Address { get; set; }
+        
         [Required(ErrorMessage="Введите название компании")]
         public string CompanyName { get; set; }
+        
         [Required(ErrorMessage = "Введите описание")]
         public string Description { get; set; }
         
+        [Required(ErrorMessage = "Введите причину подачи заявки")] 
+        public string Reason { get; set; }
+
+        [Required]
+        public bool IsSolved { get; set; }
+        
+        [Required]
+        public virtual Secretary Secretary { get; set; }
+
         public virtual ICollection<Complaint> Complaints { get; set; }
-        public virtual PartnershipRequest PartnershipRequest { get; set; }
+        //public virtual PartnershipRequest PartnershipRequest { get; set; }
     }
 }
