@@ -12,12 +12,19 @@ namespace FundApp.Controllers
     {
         FundContext db = new FundContext();
 
-        #region Выбор
         public ActionResult SignUpChoice()
         {
             return View();
         }
-        #endregion
+
+        //Проверяем есть ли уже пользователь под таким же логином
+        public bool IsNewLoginValid(string login)
+        {
+            if (db.Users.Count(n => n.Login == login) == 0)
+                return true;
+            else
+                return false;
+        }
 
         #region Для пользователя
         public ActionResult SignUpFormRankUser()
@@ -30,12 +37,20 @@ namespace FundApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                registeredUser.ItemRankUser.RegistrationDate = DateTime.Now;
+                if (!IsNewLoginValid(registeredUser.ItemRankUser.Login))
+                {
+                    ViewBag.login = registeredUser.ItemRankUser.Login;
+                    return View(registeredUser);
+                }
+                else
+                {
+                    registeredUser.ItemRankUser.RegistrationDate = DateTime.Now;
+                    
+                    db.RankUsers.Add(registeredUser.ItemRankUser);
+                    db.SaveChanges();
 
-                db.RankUsers.Add(registeredUser.ItemRankUser);
-                db.SaveChanges();
-
-                return View("RegistrationResult");
+                    return View("RegistrationResult");
+                }
             }
             else
             {
@@ -56,6 +71,12 @@ namespace FundApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!IsNewLoginValid(registeredUser.ItemEcologist.Login))
+                {
+                    ViewBag.login = registeredUser.ItemEcologist.Login;
+                    return View(registeredUser); 
+                }
+
                 registeredUser.ItemEcologist.RegistrationDate = DateTime.Now;
 
                 db.Ecologists.Add(registeredUser.ItemEcologist);
@@ -77,21 +98,34 @@ namespace FundApp.Controllers
             return View();
         }
 
-        [HttpPost] 
-        public ActionResult SignUpFormPartner(RegistrationViewModel registeredPartner)
+        [HttpPost]
+        public ActionResult SignUpFormPartner(Partner registeredPartner)
         {
-            if (ModelState.IsValid)
+            if (!IsNewLoginValid(registeredPartner.Login))
             {
-                Debug.WriteLine(registeredPartner.ItemPartner.Name);
-                Debug.WriteLine(registeredPartner.ItemPartnershipRequest.Reason);
+                ViewBag.login = registeredPartner.Login;
+                return View(registeredPartner);
+            }
 
-            }
-            else
-            {
-                Debug.WriteLine("Wrong");
-            }
+            registeredPartner.RegistrationDate = DateTime.Now;
+            registeredPartner.IsSolved = false; //секретарь еще не принял заявку
+
+            registeredPartner.Secretary = db.Secretaries.FirstOrDefault();
             
-            return View();
+            try
+            {
+                db.Partners.Add(registeredPartner);
+                db.SaveChanges();
+
+                ViewBag.regResult = true;
+
+                return View("RegistrationResult");
+            }
+            catch
+            {
+                ViewBag.regResult = false;
+                return View("RegistrationResult");
+            }
         }
         #endregion
     }

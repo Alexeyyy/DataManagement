@@ -103,7 +103,7 @@
 
         <div class="menu">
             <header>
-                @if (Session["Role"] == null)
+                @if (Session["Role"] == null || Session["Role"] == "NotAllowed")
                 {
                     using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
                     {
@@ -116,6 +116,11 @@
                                     Логин или пароль введены неверно!
                                 </div>
                             }
+                        }
+                        else if(Session["Role"] == "NotAllowed") {
+                                <div class="form-message">
+                                    Отказано в доступе!
+                                </div>
                         }
                         @Html.TextBox("login", null, new { @class = "form-control", placeholder = "login" })
                         @Html.Password("password", null, new { @class = "form-control", placeholder = "password" })

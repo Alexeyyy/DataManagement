@@ -111,6 +111,19 @@ namespace FundApp.Controllers
             return RedirectToAction("SystemNewsCreation");
         }
 
+        //Удаление новости
+        public ActionResult DeleteNews(int achievementID)
+        {
+            var achievement = db.Achivements.Find(achievementID);
+
+            if (achievement != null)
+            {
+                db.Achivements.Remove(achievement);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("SystemNewsCreation");
+        }
         #endregion
         
         #region Экологические кружки
@@ -203,6 +216,7 @@ namespace FundApp.Controllers
 
             TryUpdateModel<Section>(section);
 
+            //расчет двух "столбцов"
             section.CalculateParticipantsCount();
             section.CalculateFreeSpots();
                                                 

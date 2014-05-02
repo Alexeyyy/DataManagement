@@ -88,6 +88,10 @@
             </div>
             <div class="form-element-message">
                 @Html.ValidationMessageFor(n => n.ItemEcologist.Login)
+                @if (ViewBag.login != null)
+                {
+                    <span>Логин уже существует</span>
+                }
             </div>
         </div>
 

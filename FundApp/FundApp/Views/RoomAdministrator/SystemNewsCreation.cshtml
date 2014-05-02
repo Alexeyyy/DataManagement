@@ -15,6 +15,7 @@
                 <th>Проблема</th>
                 <th>Состояние</th>
                 <th>Запись о достижении</th>
+                <th>Удаление записи</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,14 @@
                         else
                         {
                             @Html.ActionLink("Редактировать", "EditNews", new { id = p.ProblemID })
+                        }
+                    </td>
+                    <td>
+                        @if (p.Achievement != null)
+                        {
+                            @Html.ActionLink("Удалить", "DeleteNews", new { achievementID = p.Achievement.AchievementID} );                        
+                        } else {
+                            <span>-</span>
                         }
                     </td>
                 </tr>

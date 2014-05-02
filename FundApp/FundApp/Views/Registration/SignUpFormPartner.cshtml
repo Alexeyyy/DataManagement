@@ -1,4 +1,4 @@
-﻿@model FundApp.Models.RegistrationViewModel
+﻿@model FundApp.Models.Partner
 
 @{
     ViewBag.Title = "SignUpFormPartner";
@@ -16,10 +16,10 @@
                 Введите ваше имя:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.Name, new { @class = "form-control", placeholder = "Имя" })
+                @Html.TextBoxFor(n => n.Name, new { @class = "form-control", placeholder = "Имя" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Name)
+                @Html.ValidationMessageFor(n => n.Name)
             </div>
         </div>
     
@@ -30,10 +30,10 @@
                 Введите вашу фамилию:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.Surname, new { @class = "form-control", placeholder = "Фамилия" })
+                @Html.TextBoxFor(n => n.Surname, new { @class = "form-control", placeholder = "Фамилия" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Surname)
+                @Html.ValidationMessageFor(n => n.Surname)
             </div>
         </div>
     
@@ -44,10 +44,10 @@
                 Введите ваше отчество:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n =>n.ItemPartner.FatherName, new { @class = "form-control", placeholder = "Отчество" })
+                @Html.TextBoxFor(n =>n.FatherName, new { @class = "form-control", placeholder = "Отчество" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.FatherName)
+                @Html.ValidationMessageFor(n => n.FatherName)
             </div>
         </div>
 
@@ -56,13 +56,13 @@
                 Укажите ваш пол:
             </div>
             <div class="form-element-self">
-                @Html.DropDownListFor(n => n.ItemPartner.Sex, new [] {
+                @Html.DropDownListFor(n => n.Sex, new [] {
                                    new SelectListItem() {Text = "Мужской", Selected = true, Value = bool.TrueString},
                                    new SelectListItem() {Text = "Женский", Selected = false, Value = bool.FalseString}
                                   })    
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Sex)
+                @Html.ValidationMessageFor(n => n.Sex)
             </div>
         </div>
         
@@ -71,10 +71,10 @@
                 Введите вашу дату рождения:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.BirthDate, new { @class = "form-control", placeholder = "Дата рождения (00.00.0000)" })
+                @Html.TextBoxFor(n => n.BirthDate, new { @class = "form-control", placeholder = "Дата рождения (00.00.0000)" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.BirthDate)
+                @Html.ValidationMessageFor(n => n.BirthDate)
             </div>
         </div>
 
@@ -83,10 +83,14 @@
                 Придумайте логин:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.Login, new { @class = "form-control", placeholder = "Логин" })
+                @Html.TextBoxFor(n => n.Login, new { @class = "form-control", placeholder = "Логин" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Login)
+                @Html.ValidationMessageFor(n => n.Login)
+                @if (ViewBag.login != null)
+                {
+                    <span>Логин уже существует</span>
+                }
             </div>
         </div>
 
@@ -95,10 +99,10 @@
                 Придумайте пароль:
             </div>
             <div class="form-element-self">
-                @Html.PasswordFor(n => n.ItemPartner.Password, new { @class = "form-control", placeholder = "Пароль" })
+                @Html.PasswordFor(n => n.Password, new { @class = "form-control", placeholder = "Пароль" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Password)
+                @Html.ValidationMessageFor(n => n.Password)
             </div>
         </div>
 
@@ -107,10 +111,10 @@
                 Введите адрес электронной почты:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.Email, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+                @Html.TextBoxFor(n => n.Email, new { @class = "form-control", placeholder = "Адрес электронной почты" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Email)
+                @Html.ValidationMessageFor(n => n.Email)
             </div>
         </div>
 
@@ -119,10 +123,10 @@
                 Введите название компании:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.CompanyName, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+                @Html.TextBoxFor(n => n.CompanyName, new { @class = "form-control", placeholder = "Название компании" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.CompanyName)
+                @Html.ValidationMessageFor(n => n.CompanyName)
             </div>
         </div>
 
@@ -131,10 +135,10 @@
                 Введите адрес компании:
             </div>
             <div class="form-element-self">
-                @Html.TextBoxFor(n => n.ItemPartner.Address, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+                @Html.TextBoxFor(n => n.Address, new { @class = "form-control", placeholder = "Адрес компании" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Address)
+                @Html.ValidationMessageFor(n => n.Address)
             </div>
         </div>
 
@@ -143,33 +147,29 @@
                 Введите описание компании:
             </div>
             <div class="form-element-self">
-                @Html.TextAreaFor(n => n.ItemPartner.Description, new { @class = "form-control", placeholder = "Адрес электронной почты" })
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control", placeholder = "Расскажите о компании" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartner.Description)
+                @Html.ValidationMessageFor(n => n.Description)
             </div>
         </div>
 
-
         <div class="clear"></div>
-
-        @*<h2>Заявка</h2>
 
         <div class="form-element">
             <div class="form-element-title">
                 Введите причину подачи заявки:
             </div>
             <div class="form-element-self">
-                @Html.TextAreaFor(n => n.ItemPartnershipRequest.Reason, new { @class = "form-control", placeholder = "Напишите причину, согласно которой вы хотите подать заявку на сотрудничество..." })
+                @Html.TextAreaFor(n => n.Reason, new { @class = "form-control", placeholder = "Причина" })
             </div>
             <div class="form-element-message">
-                @Html.ValidationMessageFor(n => n.ItemPartnershipRequest.Reason)
+                @Html.ValidationMessageFor(n => n.Description)
             </div>
-        </div>*@
-
+        </div>
+        @Html.HiddenFor(n => n.Secretary)
+        <div class="clear"></div>
     </div>
-    
-    <div class="clear"></div>
     
     <button type="submit" class="registration-submit btn btn-default">Подать заявку</button>
 }

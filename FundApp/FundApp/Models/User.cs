@@ -14,28 +14,28 @@ namespace FundApp.Models
         [Key]
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Имя' введен неверно или не задан вообще")]
         public string Name { get; set; }
         
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Фамилия' введен неверно или не задан вообще")]
         public string Surname { get; set; }
         
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Отчество' введен неверно или не задан вообще")]
         public string FatherName { get; set; }
         
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Пол' введен неверно или не задан вообще")]
         public bool Sex { get; set; }
         
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Дата Рождения' введен неверно или не задан вообще")]
         public DateTime BirthDate { get; set; }
 
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Логин' введен неверно или не задан вообще")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Пароль' введен неверно или не задан вообще")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Параметр введен неверно или не задан вообще")]
+        [Required(ErrorMessage = "Параметр 'Email' введен неверно или не задан вообще")]
         public string Email { get; set; }
 
         public DateTime RegistrationDate { get; set; }

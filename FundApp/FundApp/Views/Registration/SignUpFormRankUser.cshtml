@@ -87,6 +87,9 @@
             </div>
             <div class="form-element-message">
                 @Html.ValidationMessageFor(n => n.ItemRankUser.Login)
+                @if(ViewBag.login != null) {
+                    <span>Логин уже существует</span>
+                }
             </div>
         </div>
 

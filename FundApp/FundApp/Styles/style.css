@@ -98,13 +98,13 @@ nav
 
     .nav-link:hover
     {
-        color: #ffffff;
+        color: #e4e4e4;
         text-decoration: none;
     }
 
     .nav-link:active
     {
-        color: #ffffff;
+        color: #e4e4e4;
         text-decoration: none;
     }
 
@@ -395,3 +395,41 @@ textarea
 {
     text-align: center;
 }
+
+/*Кабинеты*/
+.choice-group {
+
+}
+
+.choice-item
+{
+
+}
+
+    .choice-item h2
+    {
+        font: bold 25px Arial serif;
+        margin: 15px 0; 
+    }
+
+    .choice-item p
+    {
+        font: normal 20px Arial serif;
+        margin: 10px 0;
+    }
+
+.rank-link
+{
+    font: bold 20px Arial serif;
+    color: #428bca;
+}
+
+    .rank-link:hover
+    {
+        color: #1a7ab2;
+    }
+
+    .rank-link:active
+    {
+        color: #1a7ab2;
+    }

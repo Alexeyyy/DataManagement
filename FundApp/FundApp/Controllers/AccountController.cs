@@ -60,8 +60,15 @@ namespace FundApp.Controllers
 
                     if (user is Partner)
                     {
-                        Session.Add("Role", "Partner");
-                        Session.Add("Greeting", "Добро пожаловать! Партнер " + user.Name + " " + user.Surname);
+                        if ((user as Partner).IsSolved)
+                        {
+                            Session.Add("Role", "Partner");
+                            Session.Add("Greeting", "Добро пожаловать! Партнер " + user.Name + " " + user.Surname);
+                        }
+                        else
+                        {
+                            Session.Add("Role", "NotAllowed");
+                        }
                     }
                     
                     Session.Add("ErrorLogin", false);
