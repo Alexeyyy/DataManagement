@@ -104,22 +104,34 @@ namespace FundApp.Controllers
         public ActionResult Councils()
         {
             List<Council> councils = db.Councils.ToList();
+            ViewBag.ecologist = db.Ecologists.Find(Session["SystemUserID"]);
+
             return View(councils);
         }
 
         //регистрация на совет 
         public ActionResult RegisterOnCouncil(int councilID)
         {
-            //Debug.WriteLine(councilID);
             var council = db.Councils.Find(councilID);
             var ecologist = db.Ecologists.Find(Session["SystemUserID"]);
 
             council.Ecologists.Add(ecologist);
             TryUpdateModel<Council>(council);
             db.Entry<Council>(council).State = System.Data.EntityState.Modified;
+            db.SaveChanges();
+                        
+            return RedirectToAction("Councils");
+        }
 
-            int count = council.Ecologists.Count;
+        //дерегистрация с совета
+        public ActionResult DeregisterFromCouncil(int councilID)
+        {
+            var council = db.Councils.Find(councilID);
+            var ecologist = db.Ecologists.Find(Session["SystemUserID"]);
 
+            council.Ecologists.Remove(ecologist);
+            TryUpdateModel<Council>(council);
+            db.Entry<Council>(council).State = System.Data.EntityState.Modified;
             db.SaveChanges();
             
             return RedirectToAction("Councils");

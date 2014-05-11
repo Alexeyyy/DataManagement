@@ -169,7 +169,7 @@ namespace FundApp.Controllers
             {
                 s.Ecologist = db.Ecologists.Find(ecologistID);
                 
-                s.CalculateParticipantsCount();
+                //s.CalculateParticipantsCount();
                 s.CalculateFreeSpots();
 
                 db.Sections.Add(s);

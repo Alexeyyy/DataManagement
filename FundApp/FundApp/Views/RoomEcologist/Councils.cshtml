@@ -26,7 +26,15 @@
                     <td>@c.Description</td>
                     <td>@c.Problem.Title</td>
                     <td>@c.AssignmentDate.ToShortDateString()</td>
-                    <td>@Html.ActionLink("Зарегистрироваться", "RegisterOnCouncil", new { councilID = c.CouncilID }, null)</td>    
+                    
+                    @if (!c.Ecologists.Contains(ViewBag.ecologist))
+                    {
+                        <td>@Html.ActionLink("Зарегистрироваться", "RegisterOnCouncil", new { councilID = c.CouncilID }, null)</td>    
+                    }
+                    else
+                    {
+                        <td>@Html.ActionLink("Дерегистрироваться", "DeregisterFromCouncil", new { councilID = c.CouncilID }, null)</td>    
+                    }
                 </tr>
             }
         </tbody>

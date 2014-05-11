@@ -24,6 +24,7 @@ namespace FundApp.Controllers
             return View();    
         }
 
+        //создание и отправка жалобы
         [HttpPost]
         public ActionResult Complaint(Complaint complaint)
         {
@@ -43,11 +44,45 @@ namespace FundApp.Controllers
         public ActionResult Sections()
         {
             List<Section> sections = db.Sections.ToList();
+            ViewBag.participant = db.RankUsers.Find(Session["SystemUserID"]);
+            
             return View(sections);
         }
 
         //регистрация на курсы
-        
+        public ActionResult RegisterOnSection(int sectionID)
+        {
+            var section = db.Sections.Find(sectionID);
+            var participant = db.RankUsers.Find(Session["SystemUserID"]);
+                        
+            section.Participants.Add(participant);
+            section.CalculateParticipantsCount();
+            section.CalculateFreeSpots();
+            TryUpdateModel<Section>(section);
+            db.Entry<Section>(section).State = System.Data.EntityState.Modified;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Sections");
+        }
+
+        //дерегистрация
+        public ActionResult DeregisterFromSection(int sectionID)
+        {
+            var section = db.Sections.Find(sectionID);
+            var participant = db.RankUsers.Find(Session["SystemUserID"]);
+
+            section.Participants.Remove(participant);
+            section.CalculateParticipantsCount();
+            section.CalculateFreeSpots();
+            TryUpdateModel<Section>(section);
+            db.Entry<Section>(section).State = System.Data.EntityState.Modified;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Sections");
+        }
+
         #endregion
     }
 }

@@ -42,9 +42,16 @@
                     <td>
                         @s.FreeSpotsCount
                     </td>
-                    <td>
-                        @Html.ActionLink("Зарегистрироваться", "RegisterOnSection", "RoomUser", new { sectionID = s.SectionID }, null)
-                    </td>
+                    @if(!s.Participants.Contains(ViewBag.participant)) {
+                        <td>
+                            @Html.ActionLink("Зарегистрироваться", "RegisterOnSection", "RoomUser", new { sectionID = s.SectionID }, null)
+                        </td>
+                    }
+                    else {
+                        <td>
+                            @Html.ActionLink("Дерегистрироваться", "DeregisterFromSection", "RoomUser", new { sectionID = s.SectionID }, null)
+                        </td>
+                    }
                 </tr>
             }
         </tbody>
