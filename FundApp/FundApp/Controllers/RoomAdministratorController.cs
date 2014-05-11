@@ -135,14 +135,14 @@ namespace FundApp.Controllers
             return View(db.Sections.ToList());
         }
 
-        private SelectListItem[] GetEcologistsSurnames()
+        private SelectListItem[] GetEcologistsSurnames(int id)
         {
             List<Ecologist> availableEcologists = db.Ecologists.ToList();
             SelectListItem[] list = new SelectListItem[availableEcologists.Count];
 
             for (int i = 0; i < list.Length; i++)
             {
-                if (i == 0)
+                if (availableEcologists[i].ID == id)
                     list[i] = new SelectListItem() { Text = availableEcologists[i].Surname, Selected = true, Value = availableEcologists[i].ID.ToString() };
                 else
                     list[i] = new SelectListItem() { Text = availableEcologists[i].Surname, Selected = false, Value = availableEcologists[i].ID.ToString() };
@@ -155,7 +155,7 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult CreateSection()
         {
-            ViewBag.ecologists = GetEcologistsSurnames();
+            ViewBag.ecologists = GetEcologistsSurnames(1); //при создании первый эколог будет выбран по умолчанию  
 
             return View();
         }
@@ -163,7 +163,7 @@ namespace FundApp.Controllers
         [HttpPost]
         public ActionResult CreateSection(Section s, int ecologistID)
         {
-            ViewBag.ecologists = GetEcologistsSurnames();
+            ViewBag.ecologists = GetEcologistsSurnames(ecologistID);
             //Debug.WriteLine(ecologistID + " " + ecologistID.GetType());
             try
             {
@@ -201,7 +201,8 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult EditSection(int sectionID)
         {
-            ViewBag.ecologists = GetEcologistsSurnames();
+            int ecologistID = db.Sections.Find(sectionID).Ecologist.ID;
+            ViewBag.ecologists = GetEcologistsSurnames(ecologistID);
             
             return View(db.Sections.Find(sectionID));
         }
@@ -209,7 +210,7 @@ namespace FundApp.Controllers
         [HttpPost]
         public ActionResult EditSection(Section s, int ecologistID)
         {
-            ViewBag.ecologists = GetEcologistsSurnames(); //учитываем dropdown list
+            ViewBag.ecologists = GetEcologistsSurnames(ecologistID); //учитываем dropdown list
             
             var section = db.Sections.Find(s.SectionID);
             section.Ecologist = db.Ecologists.Find(ecologistID);

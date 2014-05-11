@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -33,7 +34,7 @@ namespace FundApp.Models
 
         public void CalculateParticipantsCount()
         {
-            if (Participants != null)
+            if (Participants.Count != null)
                 ParticipantsCount = Participants.Count();
             else
                 ParticipantsCount = 0;

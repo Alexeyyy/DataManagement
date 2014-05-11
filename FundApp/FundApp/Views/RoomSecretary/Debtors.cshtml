@@ -1,0 +1,87 @@
+﻿@model FundApp.Models.ViewModels.DebtorComplaint
+@{
+    ViewBag.Title = "Debtors";
+}
+
+<h2>Организации-должники</h2>
+
+@if (Model.listComplaints.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <td>Заголовок</td>
+                <td>Описание</td>
+                <td>Дата опубликования</td>
+                <td>Автор</td>
+                <td>Организация-Должник</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.listComplaints)
+            {
+                <tr>
+                    <td>@c.Title</td>
+                    <td>@c.Description</td>
+                    <td>@c.AppearingDate.ToShortDateString()</td>
+                    <td>@c.Creator.Surname @c.Creator.Name @c.Creator.FatherName</td>
+                    <td>
+                        @if (c.OrganisationDeptor != null)
+                        {
+                            <span>@c.OrganisationDeptor.Name</span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Создать", "CreateDebtor", new {complaintID = c.ComplaintID}, null)
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        В настоящее время жалоб подано не было.
+    </p>
+}
+
+<h2>Организации/лица-штрафники</h2>
+
+@if (Model.listDebtors.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <td>ФИО/Наименование организации</td>
+                <td>Причина</td>
+                <td>Срок</td>
+                <td>Сумма штрафа</td>
+                <td>Ход уплаты</td>
+                <td>Редактирование</td>
+                <td>Удаление</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model.listDebtors)
+            {
+                <tr>
+                    <td>@d.Name</td>
+                    <td>@d.Reason</td>
+                    <td>@d.PayTime</td>
+                    <td>@d.FineAmount</td>
+                    <td>@d.IsPayed</td>
+                    <td>@Html.ActionLink("Редактировать", "EditDebtor", new {debtorID = d.OrganisationDeptorID}, null)</td>
+                    <td>@Html.ActionLink("Удаление", "DeleteDebtor", new {debtorID = d.OrganisationDeptorID}, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        Список должников пуст.
+    </p>
+}

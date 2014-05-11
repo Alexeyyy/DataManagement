@@ -174,23 +174,23 @@
                         }
                         if (Session["Role"] == "Secretary") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "SecretaryRoom", "RoomSecretary", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "Ecologist") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "EcologistRoom", "RoomEcologist", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "User") {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "UserRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "UserRoom", "RoomUser", null, new { @class = "nav-link"}) 
                             </li>
                         }
                         if (Session["Role"] == "Partner")
                         {
                             <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
+                                @Html.ActionLink("Кабинет", "PartnerRoom", "RoomPartner", null, new { @class = "nav-link"}) 
                             </li>
                         }
                     }

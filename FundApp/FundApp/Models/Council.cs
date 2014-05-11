@@ -11,16 +11,22 @@ namespace FundApp.Models
     {
         [Key]
         public int CouncilID { get; set; }
+        
+        [Required]
+        public string Title { get; set; }
+        
         [Required]
         public DateTime AssignmentDate { get; set; }
         
         [Required]
         public bool CounsilResult { get; set; }
+        
         [Required]
         public string Description { get; set; }
 
         [Required]
         public virtual EcologicalProblem Problem { get; set; }
+        
         public virtual ICollection<Ecologist> Ecologists { get; set; }
     }
 }

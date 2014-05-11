@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FundApp.Models.Complaint>
+
+@{
+    ViewBag.Title = "Complaints";
+}
+
+<h2>Жалобы пользователей</h2>
+
+@if (Model.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Дата публикования</th>
+                <th>Создатель</th>
+                <th>Отклонение</th>
+                <th>Принятие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Title</td>
+                    <td>@c.Description</td>
+                    <td>@c.AppearingDate</td>
+                    <td>@c.Creator.Surname @c.Creator.Name @c.Creator.FatherName</td>
+                    <td>@Html.ActionLink("Отклонить", "DeclineComplaint", new {complaintID = c.ComplaintID}, null)</td>
+                    <td>@Html.ActionLink("Принять", "CreateProblem", new {complaintID = c.ComplaintID}, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        В настоящее время жалоб на нарушения подано не было.
+    </p>
+}
+
+@Html.ActionLink("Создать жалобу", "CreateComplaint", null, null);

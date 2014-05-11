@@ -11,6 +11,8 @@ namespace FundApp.Models
         [Key]
         public int OrganisationDeptorID { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public string Reason { get; set; }
         [Required]
         public decimal FineAmount { get; set; }

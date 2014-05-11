@@ -177,9 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405011955360_2355.cs" />
-    <Compile Include="Migrations\201405011955360_2355.Designer.cs">
-      <DependentUpon>201405011955360_2355.cs</DependentUpon>
+    <Compile Include="Migrations\201405111155389_1555.cs" />
+    <Compile Include="Migrations\201405111155389_1555.Designer.cs">
+      <DependentUpon>201405111155389_1555.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -190,6 +190,7 @@
     <Compile Include="Models\FundContext.cs" />
     <Compile Include="Models\OrganisationDeptor.cs" />
     <Compile Include="Models\PartnershipRequest.cs" />
+    <Compile Include="Models\ViewModels\DebtorComplaint.cs" />
     <Compile Include="Models\ViewModels\RegistrationControllerModels.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\User.cs" />
@@ -340,19 +341,33 @@
     <Content Include="Views\RoomAdministrator\SystemSections.cshtml" />
     <Content Include="Views\RoomAdministrator\CreateSection.cshtml" />
     <Content Include="Views\RoomAdministrator\EditSection.cshtml" />
+    <Content Include="Views\RoomSecretary\SecretaryRoom.cshtml" />
+    <Content Include="Views\RoomSecretary\Requests.cshtml" />
+    <Content Include="Views\RoomSecretary\Councils.cshtml" />
+    <Content Include="Views\RoomSecretary\EditCouncil.cshtml" />
+    <Content Include="Views\RoomSecretary\CreateCouncil.cshtml" />
+    <Content Include="Views\RoomSecretary\Debtors.cshtml" />
+    <Content Include="Views\RoomSecretary\CreateDebtor.cshtml" />
+    <Content Include="Views\RoomSecretary\EditDebtor.cshtml" />
+    <Content Include="Views\RoomEcologist\Complaints.cshtml" />
+    <Content Include="Views\RoomEcologist\Councils.cshtml" />
+    <Content Include="Views\RoomEcologist\CreateProblem.cshtml" />
+    <Content Include="Views\RoomEcologist\CreateComplaint.cshtml" />
+    <Content Include="Views\RoomPartner\CreateComplaint.cshtml" />
+    <Content Include="Views\RoomPartner\PartnerRoom.cshtml" />
+    <Content Include="Views\RoomUser\Complaint.cshtml" />
+    <Content Include="Views\RoomUser\Sections.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
-    <Folder Include="Views\RoomPartner\" />
-    <Folder Include="Views\RoomSecretary\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201405011955360_2355.resx">
-      <DependentUpon>201405011955360_2355.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405111155389_1555.resx">
+      <DependentUpon>201405111155389_1555.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

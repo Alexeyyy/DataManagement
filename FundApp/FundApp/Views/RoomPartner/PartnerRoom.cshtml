@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "PartnerRoom";
+}
+
+<h2>Кабинет организации-партнера</h2>
+
+<table class="choice-group">
+    <tr>
+        <td class="choice-item">
+            <h2>Создание жалобы</h2>
+            <p>
+                В данном блоке представителю организации-партнера предлагается оформить жалобу на экологическое нарушение
+            </p>
+            @Html.ActionLink("Пожаловаться", "CreateComplaint", "RoomPartner", new { @class = "rank-link"})
+        </td>
+    </tr>
+</table>

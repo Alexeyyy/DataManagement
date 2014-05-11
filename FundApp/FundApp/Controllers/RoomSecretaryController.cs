@@ -1,20 +1,335 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FundApp.Models;
+using FundApp.Models.ViewModels;
 
 namespace FundApp.Controllers
 {
     public class RoomSecretaryController : Controller
     {
-        //
-        // GET: /RoomSecretary/
+        FundContext db = new FundContext();
 
-        public ActionResult Index()
+        public ActionResult SecretaryRoom()
         {
             return View();
         }
 
+        #region Заявки
+
+        //Отображение списка заявок
+        public ActionResult Requests()
+        {
+            return View(db.Partners.Where(n => n.IsSolved == false).ToList());
+        }
+
+        //Удаление заявки   
+        public ActionResult DeleteRequest(int requestID)
+        {
+            var request = db.Partners.Find(requestID);
+            
+            if (request != null)
+            {
+                db.Partners.Remove(request);
+                db.SaveChanges();
+            }
+
+            return View("Requests", db.Partners.Where(n => n.IsSolved == false).ToList());
+        }
+
+        //Принятие заявки
+        public ActionResult AcceptRequest(int requestID)
+        {
+            var request = db.Partners.Find(requestID);
+            Debug.WriteLine(Session["SystemUserID"]);
+
+            if (request != null)
+            {
+                request.IsSolved = true;
+                request.Secretary = db.Secretaries.Find(Session["SystemUserID"]);
+                db.SaveChanges();
+            }
+
+            return View("Requests", db.Partners.Where(n => n.IsSolved == false).ToList());
+        }
+
+        #endregion
+
+        #region Экологические советы
+
+        //Получим список проблем для View
+        private SelectListItem[] GetProblemsList(int id)
+        {
+            List<EcologicalProblem> problems = db.EcologicalProblems.ToList();
+            SelectListItem[] list = new SelectListItem[problems.Count];
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (problems[i].ProblemID == id)
+                    list[i] = new SelectListItem() { Text = problems[i].Title, Selected = true, Value = problems[i].ProblemID.ToString() };
+                else
+                    list[i] = new SelectListItem() { Text = problems[i].Title, Selected = false, Value = problems[i].ProblemID.ToString() };
+            }
+
+            return list;
+        }
+
+        //Отображение экологических советов
+        public ActionResult Councils()
+        {
+            //Скрывать ли ссылку создания совета или нет
+            if (db.Councils.ToList().Count == db.EcologicalProblems.ToList().Count)
+                ViewBag.showCreateLink = false;
+            else
+                ViewBag.showCreateLink = true;
+            
+            return View(db.Councils.ToList());
+        }
+
+        //Удаление совета НЕ РАБОТАЕТ!
+        public ActionResult DeleteCouncil(int councilID)
+        {
+            var council = db.Councils.Find(councilID);
+            
+            if (council != null)
+            {
+                council.Ecologists.Clear();
+                db.Councils.Remove(council);
+                db.SaveChanges();
+            }
+
+
+            return RedirectToAction("Councils");
+        }
+
+        //Редактирование совета
+        [HttpGet]
+        public ActionResult EditCouncil(int councilID)
+        {
+            int problemID = db.Councils.Find(councilID).Problem.ProblemID;
+            //ViewBag.problems = GetProblemsList(problemID);
+            ViewBag.problemID = problemID;
+            
+            return View(db.Councils.Find(councilID));
+        }
+
+        [HttpPost]
+        public ActionResult EditCouncil(Council c, int problemID)
+        {
+            ViewBag.problems = GetProblemsList(problemID); //отсылка в View
+            var council = db.Councils.Find(c.CouncilID); //редактируемый совет
+            
+            council.Problem = db.EcologicalProblems.Find(problemID);
+                                    
+            TryUpdateModel<Council>(council);
+            db.Entry<Council>(council).State = System.Data.EntityState.Modified;
+            
+            db.SaveChanges();
+
+            //Debug.WriteLine(c.Problem.ProblemID);
+            var problem = db.EcologicalProblems.Find(problemID);
+            bool result = db.Councils.Find(c.CouncilID).CounsilResult; ;
+            string name = problem.Title;
+
+            problem.IsSolved = result;
+
+            TryUpdateModel<EcologicalProblem>(problem);
+            db.Entry<EcologicalProblem>(problem).State = System.Data.EntityState.Modified;
+
+            db.SaveChanges();
+
+            problem.Title = name;
+            db.SaveChanges();
+
+            return RedirectToAction("Councils");
+        }
+
+        //СОЗДАНИЕ ЭКОЛОГИЧЕСКОГО СОВЕТА
+
+        //При создании необходимо учесть, что проблемы, которые будут уже рассматриваются не включать
+        private SelectListItem[] GetNonOverviewedProblems()
+        {
+            List<EcologicalProblem> problems = db.EcologicalProblems.ToList();
+            List<Council> councils = db.Councils.ToList();
+
+            for (int i = 0; i < councils.Count; i++)
+            {
+                int j = 0;
+                while (j < problems.Count)
+                {
+                    if (councils[i].Problem.ProblemID == problems[j].ProblemID)
+                    {
+                        problems.Remove(problems[j]);
+                    }
+                    else
+                        j++;
+                }
+            }
+
+            if (problems.Count != 0)
+            {
+                SelectListItem[] list = new SelectListItem[problems.Count];
+
+                for (int i = 0; i < list.Length; i++)
+                {
+                    //if (i == 0)
+                        list[i] = new SelectListItem() { Text = problems[i].Title, Selected = true, Value = problems[i].ProblemID.ToString() };
+                    //else
+                      //  list[i] = new SelectListItem() { Text = problems[i].Title, Selected = false, Value = problems[i].ProblemID.ToString() };
+                }
+
+                return list;
+            }
+            else
+                return null;
+        }
+
+        [HttpGet]
+        public ActionResult CreateCouncil()
+        {
+            SelectListItem[] list = GetNonOverviewedProblems();
+
+            if (list != null)
+            {
+                ViewBag.problems = GetNonOverviewedProblems();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Councils");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateCouncil(Council c,  int problemID)
+        {
+            var problem = db.EcologicalProblems.Find(problemID);
+            try
+            {
+                c.Problem = problem;
+                db.Councils.Add(c);
+                db.SaveChanges();
+
+                return RedirectToAction("Councils");
+            }
+            catch 
+            {
+                return View();
+            }
+        }
+        #endregion
+
+        #region Организации-штрафники
+
+        //Формирование страницы
+        [HttpGet]
+        public ActionResult Debtors()
+        {
+            //возвращаем в View нужные данные для формирования двух таблиц
+            DebtorComplaint list = new DebtorComplaint();
+            list.listComplaints = db.Complaints.ToList();
+            list.listDebtors = db.OrganisationDeptors.ToList();
+
+            return View(list);
+        }
+
+        //Удаление должника
+        public ActionResult DeleteDebtor(int debtorID)
+        {
+            //Debug.WriteLine(debtorID);
+            var debtor = db.OrganisationDeptors.Find(debtorID);
+
+            if (debtor != null)
+            {
+                db.OrganisationDeptors.Remove(debtor);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Debtors");
+        }
+
+        //Создание должника
+        [HttpGet]
+        public ActionResult CreateDebtor(int complaintID)
+        {
+            ViewBag.complaintID = complaintID;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateDebtor(OrganisationDeptor d, int complaintID)
+        {
+            Debug.WriteLine(d.Name);
+            try
+            {
+                d.Complaint = db.Complaints.Find(complaintID);
+                db.OrganisationDeptors.Add(d);
+                db.SaveChanges();
+
+                return RedirectToAction("Debtors");
+            }
+            catch {
+                ViewBag.complaintID = complaintID;
+                return View();
+            }
+        }
+
+        //Редактирование должника
+        [HttpGet]
+        public ActionResult EditDebtor(int debtorID)
+        {
+            var debtor = db.OrganisationDeptors.Find(debtorID);
+            return View(debtor);
+        }
+
+        [HttpPost]
+        public ActionResult EditDebtor(OrganisationDeptor d)
+        {
+            var debtor = db.OrganisationDeptors.Find(d.OrganisationDeptorID);
+            TryUpdateModel<OrganisationDeptor>(debtor);
+            db.Entry<OrganisationDeptor>(debtor).State = System.Data.EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Debtors");
+        }
+        
+        #endregion
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

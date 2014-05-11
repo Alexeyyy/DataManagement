@@ -2,4 +2,23 @@
     ViewBag.Title = "UserRoom";
 }
 
-<h2>UserRoom</h2>
+<h2>Кабинет пользователя</h2>
+
+<table class="choice-group">
+    <tr>
+        <td class="choice-item">
+            <h2>Создание жалобы</h2>
+            <p>
+                В данном блоке пользователю предлагается оформить жалобу на экологическое нарушение.
+            </p>
+            @Html.ActionLink("Пожаловаться", "Complaint", "RoomUser", new { @class = "rank-link"})
+        </td>
+        <td class="choice-item">
+            <h2>Запись на курсы</h2>
+            <p>
+                В данном блоке пользователь может зарегистрироваться на курсы по экологическому воспитанию.
+            </p>
+            @Html.ActionLink("Подробнее...", "Sections", "RoomUser", new { @class = "rank-link"})
+        </td>
+    </tr>
+</table>

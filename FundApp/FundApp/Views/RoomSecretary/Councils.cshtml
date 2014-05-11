@@ -1,0 +1,79 @@
+﻿@model IEnumerable<FundApp.Models.Council>
+
+@{
+    ViewBag.Title = "Councils";
+}
+
+
+<h2>Экологические советы</h2>
+
+@if (Model.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Дата проведения</th>
+                <th>Проблема</th>
+                <th>Результат</th>
+                <th>Число специалистов</th>
+                <th>Удаление</th>
+                <th>Редактирование</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>
+                        @c.Title
+                    </td>
+                    <td>
+                        @c.Description
+                    </td>
+                    <td>
+                        @c.AssignmentDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @c.Problem.Title
+                    </td>
+                    <td>
+                        @if (c.CounsilResult)
+                        {
+                            <span>Решена</span>                        
+                        }
+                        else
+                        {
+                            <span>Не решена</span>                        
+                        }
+                    </td>
+                    <td>
+                        @c.Ecologists.Count
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "DeleteCouncil", "RoomSecretary", new { councilID = c.CouncilID }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Редактировать", "EditCouncil", "RoomSecretary", new { councilID = c.CouncilID }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        В настоящее время заявок подано не было.
+    </p>
+}
+
+@*Отображаем в том случае если есть нерассмотренные проблемы*@
+@if(ViewBag.showCreateLink) {
+    @Html.ActionLink("Создать совет", "CreateCouncil")
+} else {
+    <p>
+        Все проблемы уже рассматриваются на советах!
+    </p>
+}

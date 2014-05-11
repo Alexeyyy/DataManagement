@@ -1,0 +1,73 @@
+﻿@model FundApp.Models.OrganisationDeptor
+
+@{
+    ViewBag.Title = "CreateDebtor";
+}
+
+<h2>CreateDebtor</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>OrganisationDeptor</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FineAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FineAmount)
+            @Html.ValidationMessageFor(model => model.FineAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PayTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PayTime)
+            @Html.ValidationMessageFor(model => model.PayTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsPayed)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsPayed)
+            @Html.ValidationMessageFor(model => model.IsPayed)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        @Html.Hidden("complaintID", (object)ViewBag.complaintID, null)
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

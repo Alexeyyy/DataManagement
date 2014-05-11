@@ -11,17 +11,18 @@ namespace FundApp.Controllers
 {
     public class HomeController : Controller
     {
-        FundContext context = new FundContext();
+        FundContext db = new FundContext();
         
         public ActionResult Index()
         {
-            foreach (var e in context.EcologicalProblems)
-                Debug.WriteLine(e.ProblemID);
+            
+            /*foreach (Council c in db.Councils.ToList())
+            {
+                Debug.WriteLine(c.Ecologists.Count);
+            }
 
-            Debug.WriteLine("================================");
-
-            foreach (var a in context.Achivements)
-                Debug.WriteLine(a.AchievementID);
+            int i = 0;
+             */
 
             return View();
         }

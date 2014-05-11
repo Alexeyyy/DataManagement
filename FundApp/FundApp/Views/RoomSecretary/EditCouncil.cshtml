@@ -1,0 +1,66 @@
+﻿@model FundApp.Models.Council
+
+@{
+    ViewBag.Title = "EditCouncil";
+}
+
+<h2>Редакитирование совета</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Совет</legend>
+
+        @Html.HiddenFor(model => model.CouncilID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssignmentDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignmentDate)
+            @Html.ValidationMessageFor(model => model.AssignmentDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CounsilResult)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CounsilResult)
+            @Html.ValidationMessageFor(model => model.CounsilResult)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        @*<div class="editor-label">
+            Проблема
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("problemID", (SelectListItem[])ViewBag.problems)  
+        </div>*@
+
+        @Html.Hidden("problemID", (object)ViewBag.problemID, null)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Вернуться", "Councils")
+</div>

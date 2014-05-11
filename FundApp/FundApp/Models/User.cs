@@ -67,10 +67,12 @@ namespace FundApp.Models
 
         public string InterestsSphere { get; set; }
         public string DistrictLocation { get; set; }
-
+        
         public virtual ICollection<Section> Sections { get; set; }
         public virtual ICollection<Complaint> Complaints { get; set; }
         public virtual ICollection<EcologicalProblem> EcologicalProblems { get; set; }
+
+        public virtual ICollection<Council> Councils { get; set; }
     }
 
     [Table("Administrators")]
@@ -85,19 +87,19 @@ namespace FundApp.Models
     {
         [Required(ErrorMessage = "Введите адрес компании")]
         public string Address { get; set; }
-        
-        [Required(ErrorMessage="Введите название компании")]
+
+        [Required(ErrorMessage = "Введите название компании")]
         public string CompanyName { get; set; }
-        
+
         [Required(ErrorMessage = "Введите описание")]
         public string Description { get; set; }
-        
-        [Required(ErrorMessage = "Введите причину подачи заявки")] 
+
+        [Required(ErrorMessage = "Введите причину подачи заявки")]
         public string Reason { get; set; }
 
         [Required]
         public bool IsSolved { get; set; }
-        
+
         [Required]
         public virtual Secretary Secretary { get; set; }
 
