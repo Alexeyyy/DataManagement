@@ -17,14 +17,14 @@ namespace FundApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult PartnersPage(string searchString)
+        public ActionResult SearchPartner(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
-                return View(db.Partners.ToList());
+                return View("PartnersPage", db.Partners.ToList());
             
             List<Partner> partners = db.Partners.Where(n => (n.Name.Contains(searchString) || n.Surname.Contains(searchString) || n.FatherName.Contains(searchString) || n.CompanyName.Contains(searchString) || n.Address.Contains(searchString) || n.Email.Contains(searchString) || n.Description.Contains(searchString))).ToList();
 
-            return View(partners);
+            return View("PartnersPage", partners);
         }
     }
 }

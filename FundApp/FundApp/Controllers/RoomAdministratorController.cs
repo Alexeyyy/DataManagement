@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using FundApp.Models;
+using FundApp.Models.ViewModels;
 
 namespace FundApp.Controllers
 {
@@ -70,7 +72,7 @@ namespace FundApp.Controllers
 
         //Создаем новость
         [HttpPost]
-        public ActionResult CreateNews(Achievement achievement, int ecologicalProblemID)
+        public ActionResult CreateNews(AddAchievement achievement, int ecologicalProblemID)
         {
             ViewBag.problemID = ecologicalProblemID;            
             int currentAdminId;
@@ -79,10 +81,19 @@ namespace FundApp.Controllers
             {
                 try
                 {
-                    achievement.Administrator = db.Administrators.Find(currentAdminId);
-                    achievement.EcologicalProblem = db.EcologicalProblems.Find(ecologicalProblemID);
-                    
-                    db.Achivements.Add(achievement);
+                    achievement.AchievementItem.Administrator = db.Administrators.Find(currentAdminId);
+                    achievement.AchievementItem.EcologicalProblem = db.EcologicalProblems.Find(ecologicalProblemID);
+
+                    if (achievement.ImageFile != null)
+                    {
+                        var image = new WebImage(achievement.ImageFile.InputStream);
+                        image.Resize(200, 133);
+
+                        achievement.AchievementItem.PhotoType = achievement.ImageFile.ContentType;
+                        achievement.AchievementItem.PhotoFile = image.GetBytes();
+                    }
+
+                    db.Achivements.Add(achievement.AchievementItem);
                     db.SaveChanges();
 
                     return RedirectToAction("SystemNewsCreation");
@@ -97,13 +108,26 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult EditNews(int id)
         {
-            return View(db.Achivements.Find(id));
+            AddAchievement item = new AddAchievement();
+            item.AchievementItem = db.Achivements.Find(id);
+            
+            return View(item);
         }
                 
         [HttpPost]
-        public ActionResult EditNews(Achievement a)
+        public ActionResult EditNews(AddAchievement a)
         {
-            var achievement = db.Achivements.Find(a.AchievementID);
+            var achievement = db.Achivements.Find(a.AchievementItem.AchievementID);
+
+            if (a.ImageFile != null)
+            {
+                var image = new WebImage(a.ImageFile.InputStream);
+                image.Resize(200, 133);
+
+                achievement.PhotoType = a.ImageFile.ContentType;
+                achievement.PhotoFile = image.GetBytes();
+            }
+
             TryUpdateModel<Achievement>(achievement);
             db.Entry<Achievement>(achievement).State = System.Data.EntityState.Modified;
             db.SaveChanges();
@@ -124,6 +148,29 @@ namespace FundApp.Controllers
 
             return RedirectToAction("SystemNewsCreation");
         }
+
+        //Фильтрация
+        [HttpGet]
+        public ActionResult SolvedProblemFilter()
+        {
+            var filteredProblems = (from problem in db.EcologicalProblems 
+                                    where problem.IsSolved == true 
+                                    select problem).ToList();
+
+            return View("SystemNewsCreation", filteredProblems);
+        }
+
+        [HttpGet]
+        public ActionResult UnsolvedProblemFilter()
+        {
+            var filteredProblems = (from problem in db.EcologicalProblems
+                                    where problem.IsSolved == false
+                                    select problem).ToList();
+
+            return View("SystemNewsCreation", filteredProblems);
+
+        }
+      
         #endregion
         
         #region Экологические кружки

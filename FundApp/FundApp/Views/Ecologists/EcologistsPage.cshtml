@@ -7,7 +7,7 @@
 <h2>Экологи нашего фонда</h2>
 
 <div class="search-block">
-     @using (Html.BeginForm("EcologistsPage", "Ecologists", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     @using (Html.BeginForm("SearchEcologists", "Ecologists", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
      {
         @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
         <button type="submit" class="btn btn-default">Искать</button>
@@ -30,8 +30,7 @@
                 <th>Область интересов</th>
                 <th>Образование</th>
                 <th>Регион базирования</th>
-                <th>Удаление</th>
-                <th>Редактирование</th>
+                <th>Публикации</th>
             </tr>
         </thead>
         <tbody>
@@ -47,8 +46,26 @@
                     <td>@e.InterestsSphere</td>
                     <td>@e.Education</td>
                     <td>@e.DistrictLocation</td>
-                    <td>@Html.ActionLink("Удалить", "Delete", new { id = e.ID })</td>
-                    <td>@Html.ActionLink("Редактировать", "Edit", new { id = e.ID })</td>
+                    <td>
+                        @try
+                        {
+                            if (e.EcologicalProblems != null && e.EcologicalProblems.Count == 0)
+                            {
+                            <span>Нет публикаций</span>
+                            }
+                            else
+                            {
+                                for (int i = 0; i < e.EcologicalProblems.Count; i++) {
+                                    if(i != e.EcologicalProblems.Count - 1) { 
+                                        <span>@e.EcologicalProblems.ElementAt(i).Title,</span>
+                                    } else {
+                                        <span>@e.EcologicalProblems.ElementAt(i).Title</span>
+                                    }
+                                }
+                            }
+                        }
+                        catch { }
+                    </td>
                 </tr>
             }
         </tbody>

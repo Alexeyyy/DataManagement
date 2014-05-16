@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -296,6 +297,42 @@ namespace FundApp.Controllers
             return RedirectToAction("Debtors");
         }
         
+        //Фильтрация должников
+        [HttpGet]
+        public ActionResult PayedDebtorFilter()
+        {
+            DebtorComplaint list = new DebtorComplaint();
+            list.listComplaints = db.Complaints.ToList();
+            list.listDebtors = (from debtor in db.OrganisationDeptors 
+                                where debtor.IsPayed == true 
+                                select debtor).ToList();
+
+            return View("Debtors", list);
+        }
+
+        [HttpGet]
+        public ActionResult UnpayedDebtorFilter()
+        {
+            DebtorComplaint list = new DebtorComplaint();
+            list.listComplaints = db.Complaints.ToList();
+            list.listDebtors = (from debtor in db.OrganisationDeptors
+                                where debtor.IsPayed == false
+                                select debtor).ToList();
+
+            return View("Debtors", list);
+        }
+
+
+        //Запрос на должника
+        public ActionResult QueryForCrucialDebtors()
+        {
+            DebtorComplaint list = new DebtorComplaint();
+            
+            list.listDebtors = db.Database.SqlQuery<OrganisationDeptor>("GetCrucialDebtor @day_count", new SqlParameter("day_count", 3)).ToList();
+            list.listComplaints = db.Complaints.ToList();
+
+            return View("Debtors", list);
+        }
         #endregion
     }
 }

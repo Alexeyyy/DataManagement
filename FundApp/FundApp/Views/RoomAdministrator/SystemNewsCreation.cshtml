@@ -4,8 +4,14 @@
     ViewBag.Title = "AddNews";
 }
 
-<h2>Создание новостей по решенным проблемам</h2>
+<h2 class="title">Создание новостей по решенным проблемам</h2>
 
+<div class = "filtration-form">
+    <p class ="filter-p">Фильтрация экологических проблем, согласно ходу их решения</p>
+    @Html.ActionLink("Решенные", "SolvedProblemFilter", "RoomAdministrator", null, new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Нерешенные", "UnsolvedProblemFilter", "RoomAdministrator", null, new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Все", "SystemNewsCreation", "RoomAdministrator", null, new { @class = "btn btn-lg btn-default" })
+</div>
 
 @if (Model.Count() != 0)
 {

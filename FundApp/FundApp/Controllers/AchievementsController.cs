@@ -17,11 +17,11 @@ namespace FundApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult AchievementsPage(string searchString)
+        public ActionResult SearchAchievement(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                return View(db.Achivements.ToList());
+                return View("AchievementsPage", db.Achivements.ToList());
             }
 
             List<Achievement> achievements = new List<Achievement>();
@@ -38,7 +38,20 @@ namespace FundApp.Controllers
                                                     || n.EcologicalProblem.Title.Contains(searchString))).ToList();
             }
 
-            return View(achievements);
+            return View("AchievementsPage", achievements);
+        }
+
+        //Забираем картинку
+        public FileContentResult GetPicture(int achievementID)
+        {
+            var achievement = db.Achivements.Find(achievementID);
+
+            if (achievement != null)
+            {
+                return File(achievement.PhotoFile, achievement.PhotoType);
+            }
+
+            return null;
         }
     }
 }

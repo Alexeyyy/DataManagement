@@ -122,10 +122,12 @@
                                     Отказано в доступе!
                                 </div>
                         }
-                        @Html.TextBox("login", null, new { @class = "form-control", placeholder = "login" })
-                        @Html.Password("password", null, new { @class = "form-control", placeholder = "password" })
-                        <button type="submit" class="btn btn-default">Войти</button>
-                        @Html.ActionLink("Регистрация", "SignUpChoice", "Registration", null, new { @class = "btn btn-default" })
+                        <div class="sign-group">
+                            @Html.TextBox("login", null, new { @class = "form-control", placeholder = "login" })
+                            @Html.Password("password", null, new { @class = "form-control", placeholder = "password" })
+                            <button type="submit" id="temporary_id" class="btn btn-default">Войти</button>
+                            @Html.ActionLink("Регистрация", "SignUpChoice", "Registration", null, new { @class = "btn btn-default" })
+                        </div>
                     </div>
                     }
                 }
@@ -133,8 +135,8 @@
                     <div class="form-group navbar-form navbar-right">
                         <div class="form-message">
                             @Session["Greeting"]
+                            @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "btn btn-default btn-exit" })
                         </div>
-                        @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "btn btn-default" })
                     </div>
                 }
             </header>

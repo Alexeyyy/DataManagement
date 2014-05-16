@@ -3,7 +3,7 @@
     ViewBag.Title = "Debtors";
 }
 
-<h2>Организации-должники</h2>
+<h2 class="title">Жалобы</h2>
 
 @if (Model.listComplaints.Count() != 0)
 {
@@ -47,7 +47,19 @@ else
     </p>
 }
 
-<h2>Организации/лица-штрафники</h2>
+<h2 class="title">Организации/лица-штрафники</h2>
+
+<div class = "filtration-form">
+    <p class ="filter-p">Фильтрация должников по состоянию уплаты штрафных санкций</p>
+    @Html.ActionLink("Заплатившие", "PayedDebtorFilter", "RoomSecretary", null, new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Незаплатившие", "UnpayedDebtorFilter", "RoomSecretary", null, new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Все", "Debtors", "RoomSecretary", null, new { @class = "btn btn-lg btn-default" })
+</div>
+
+<div>
+    <p class ="filter-p">Запрос на должников (срок выплаты, менее 3 дней)</p>
+    @Html.ActionLink("Запрос", "QueryForCrucialDebtors", "RoomSecretary", null, new { @class = "btn btn-lg btn-default" })
+</div>
 
 @if (Model.listDebtors.Count() != 0)
 {

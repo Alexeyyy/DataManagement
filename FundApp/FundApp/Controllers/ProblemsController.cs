@@ -19,17 +19,16 @@ namespace FundApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProblemsPage(string searchString)
+        public ActionResult SearchProblem(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                return View(db.EcologicalProblems);
+                return View("ProblemsPage", db.EcologicalProblems.ToList());
             }
 
-            List<EcologicalProblem> requestedProblems = db.EcologicalProblems.Where(n => (n.Title.Contains(searchString) || n.Description.Contains(searchString))).ToList(); 
-            
-            return View(requestedProblems);
+            List<EcologicalProblem> requestedProblems = db.EcologicalProblems.Where(n => (n.Title.Contains(searchString) || n.Description.Contains(searchString))).ToList();
+
+            return View("ProblemsPage", requestedProblems);
         }
-        
     }
 }

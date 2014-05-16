@@ -15,15 +15,6 @@ namespace FundApp.Controllers
         
         public ActionResult Index()
         {
-            
-            /*foreach (Council c in db.Councils.ToList())
-            {
-                Debug.WriteLine(c.Ecologists.Count);
-            }
-
-            int i = 0;
-             */
-
             return View();
         }
     }

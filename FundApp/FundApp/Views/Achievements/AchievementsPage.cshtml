@@ -8,7 +8,7 @@
 <h2>Достижения</h2>
 
 <div class="search-block">
-     @using (Html.BeginForm("AchievementsPage", "Achievements", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     @using (Html.BeginForm("SearchAchievement", "Achievements", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
      {
         @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
         <button type="submit" class="btn btn-default">Искать</button>
@@ -40,7 +40,7 @@
                     <td>@a.EcologicalProblem.Title</td>
                     <td>
                         @if(a.PhotoFile != null) {
-                            @a.PhotoFile
+                            <img src="@Url.Action("GetPicture", new {achievementID = a.AchievementID })">
                         } else {
                             <span>Нет фото</span>
                         }

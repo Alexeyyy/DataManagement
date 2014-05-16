@@ -1,6 +1,7 @@
 namespace FundApp.Migrations
 {
     using System;
+    using System.Data.Common;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -136,6 +137,49 @@ namespace FundApp.Migrations
             );
 
             db.SaveChanges();
+
+            //Хранимые процедуры
+            DbCommand cmd = null;
+            db.Database.Connection.Open();
+            cmd = db.Database.Connection.CreateCommand();
+            //if(db.Database.)
+
+            cmd.CommandText = @"IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetCrucialDebtor]') AND type in (N'P', N'PC'))
+                            DROP PROCEDURE [dbo].[GetCrucialDebtor]";
+            cmd.ExecuteNonQuery();
+
+
+            //1. Хранимая процедура - возвращает должников, до срока выплаты которых остается @day_count дней  
+            cmd.CommandText = @"
+                            CREATE PROCEDURE [dbo].[GetCrucialDebtor] 
+	                            @day_count int
+                            AS
+                            BEGIN
+	                            SET NOCOUNT ON;
+	                            SELECT * FROM [dbo].[OrganisationDeptors] WHERE (PayTime <= DATEADD(DAY, @day_count, GETDATE()) AND IsPayed = 0)
+                            END
+                            ";
+            cmd.ExecuteNonQuery();
+
+            //2. Хранимая процедура - 
+
+
+            /*
+             CREATE PROCEDURE <Procedure_Name, sysname, ProcedureName> 
+	            -- Add the parameters for the stored procedure here
+	            <@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>, 
+	            <@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+            AS
+            BEGIN
+	            -- SET NOCOUNT ON added to prevent extra result sets from
+	            -- interfering with SELECT statements.
+	            SET NOCOUNT ON;
+
+                -- Insert statements for procedure here
+	            SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
+            END
+            GO
+             */
         }
     }
 }

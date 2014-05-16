@@ -17,11 +17,11 @@ namespace FundApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult SectionsPage(string searchString)
+        public ActionResult SearchSection(string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                return View(db.Sections.ToList());
+                return View("SectionsPage", db.Sections.ToList());
             }
             
             int lessonsCount;
@@ -37,7 +37,7 @@ namespace FundApp.Controllers
                                                         || n.Ecologist.FatherName.Contains(searchString) || n.LessonsCount == lessonsCount
                                                         || n.FreeSpotsCount == freeSpots || (n.StartLessonsTime.Year == d.Year && n.StartLessonsTime.Month == d.Month && n.StartLessonsTime.Day == d.Day))).ToList();
 
-            return View(sections);
+            return View("SectionsPage", sections);
         }
     }
 }

@@ -17,10 +17,11 @@ ul
 
 header
 {
-
+    margin: 10px auto;
+    background: url('../Images/nav/nav-bg.png') repeat;
 }
 
-header, .main-part, nav, footer
+.main-part, nav, footer
 {
     margin: 0 auto;
 }
@@ -386,7 +387,7 @@ textarea
 .form-message
 {
     float: left;
-    padding: 5px;
+    padding: 0 5px 0 0;
     color: #ff4444;
     font: normal 20px Arial serif; 
 }
@@ -433,3 +434,35 @@ textarea
     {
         color: #1a7ab2;
     }
+
+.btn-exit
+{
+    font: normal 20px Arial serif;
+}
+
+.form-group
+{
+    margin-right: 5px;
+}
+
+/*====================Create,  edit styles====================*/
+h2.title
+{
+    margin: 20px 0;
+    font: bold 30px Arial serif;    
+}
+
+/*==============Filter group==============*/
+p.filter-p
+{
+    margin: 5px 0;
+}
+
+.filtration-form
+{
+    margin: 10px 0;
+}
+
+/*==============Filter group==============*/
+
+/*====================Create,  edit styles====================*/
