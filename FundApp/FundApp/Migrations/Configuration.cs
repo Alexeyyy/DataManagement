@@ -138,48 +138,129 @@ namespace FundApp.Migrations
 
             db.SaveChanges();
 
-            //Хранимые процедуры
             DbCommand cmd = null;
             db.Database.Connection.Open();
             cmd = db.Database.Connection.CreateCommand();
-            //if(db.Database.)
-
-            cmd.CommandText = @"IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetCrucialDebtor]') AND type in (N'P', N'PC'))
-                            DROP PROCEDURE [dbo].[GetCrucialDebtor]";
+        
+            //1. Хранимая процедура - возвращает должников, до срока выплаты которых остается @day_count дней  
+            cmd.CommandText = @"IF  EXISTS 
+                                (SELECT * FROM sys.objects 
+                                 WHERE object_id = OBJECT_ID(N'[dbo].[GetCrucialDebtor]') AND type in (N'P', N'PC'))
+                                DROP PROCEDURE [dbo].[GetCrucialDebtor]";
             cmd.ExecuteNonQuery();
 
-
-            //1. Хранимая процедура - возвращает должников, до срока выплаты которых остается @day_count дней  
             cmd.CommandText = @"
                             CREATE PROCEDURE [dbo].[GetCrucialDebtor] 
 	                            @day_count int
                             AS
                             BEGIN
+                                BEGIN TRANSACTION;
 	                            SET NOCOUNT ON;
 	                            SELECT * FROM [dbo].[OrganisationDeptors] WHERE (PayTime <= DATEADD(DAY, @day_count, GETDATE()) AND IsPayed = 0)
+                                COMMIT TRANSACTION;
                             END
                             ";
             cmd.ExecuteNonQuery();
 
-            //2. Хранимая процедура - 
+            //2. Хранимая процедура - возвращает экологические проблемы, опубликованные в течение указанного числа дней
+            cmd.CommandText = @"IF  EXISTS 
+                                (SELECT * FROM sys.objects 
+                                 WHERE object_id = OBJECT_ID(N'[dbo].[GetEcologicalProblems]') AND type in (N'P', N'PC'))
+                                DROP PROCEDURE [dbo].[GetEcologicalProblems]";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE PROCEDURE [dbo].[GetEcologicalProblems]
+	                                @days_range int
+                                AS
+                                BEGIN
+	                                BEGIN TRANSACTION;
+                                    SET NOCOUNT ON;
+                                    SELECT * FROM [dbo].[EcologicalProblems] WHERE (PublicationDate >= DATEADD(DAY, -@days_range, GETDATE()))
+                                    COMMIT TRANSACTION;
+                                END
+                                ";
+            cmd.ExecuteNonQuery();
+                        
+            //3. Скалярная функция (возвращает число совершеннолетних пользователей)
+            cmd.CommandText = @"IF EXISTS (SELECT *
+                               FROM   sys.objects
+                               WHERE  object_id = OBJECT_ID(N'[dbo].[GetAdultsQuantity]')
+                                      AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' ))
+                               DROP FUNCTION [dbo].[GetAdultsQuantity]";
+            cmd.ExecuteNonQuery();
+            
+            cmd.CommandText = @"CREATE FUNCTION [dbo].[GetAdultsQuantity]
+                                (
+                                )
+                                RETURNS int
+                                AS
+                                BEGIN
+	                                DECLARE @adults int;
+	                                SELECT @adults = COUNT(*)
+	                                FROM [dbo].[Users] WHERE BirthDate <= DATEADD(YEAR, -18, GETDATE())
+	                                RETURN @adults
+                                END";
+
+            cmd.ExecuteNonQuery();
+
+            //4. Скалярная функция (возвращает число несовершеннолетних пользователей)
+            cmd.CommandText = @"IF EXISTS (SELECT *
+                               FROM   sys.objects
+                               WHERE  object_id = OBJECT_ID(N'[dbo].[GetChildrenQuantity]')
+                                      AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' ))
+                               DROP FUNCTION [dbo].[GetChildrenQuantity]";
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"CREATE FUNCTION [dbo].[GetChildrenQuantity]
+                                (
+                                )
+                                RETURNS int
+                                AS
+                                BEGIN
+	                                DECLARE @children int;
+	                                SELECT @children = COUNT(*)
+	                                FROM [dbo].[Users] WHERE BirthDate >= DATEADD(YEAR, -18, GETDATE())
+	                                RETURN @children
+                                END";
+
+            cmd.ExecuteNonQuery();
 
 
-            /*
-             CREATE PROCEDURE <Procedure_Name, sysname, ProcedureName> 
-	            -- Add the parameters for the stored procedure here
-	            <@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>, 
-	            <@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
-            AS
-            BEGIN
-	            -- SET NOCOUNT ON added to prevent extra result sets from
-	            -- interfering with SELECT statements.
-	            SET NOCOUNT ON;
+            //Тригеры
+            //1 Insert
+            cmd.CommandText = @"IF EXISTS (SELECT * FROM sys.triggers
+                                WHERE parent_class = 1 AND name = 'CalculateSpotsForInsert')
+                                DROP TRIGGER [dbo].[CalculateSpotsForInsert];";
+            cmd.ExecuteNonQuery();
 
-                -- Insert statements for procedure here
-	            SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
-            END
-            GO
-             */
+            cmd.CommandText = @"CREATE TRIGGER [dbo].[CalculateSpotsForInsert]
+                                   ON  [dbo].[SectionRankUsers]
+                                   AFTER INSERT
+                                AS 
+                                BEGIN
+	                                SET NOCOUNT ON;
+	                                UPDATE dbo.Sections SET ParticipantsCount = (SELECT COUNT(*) FROM [dbo].[SectionRankUsers] WHERE [dbo].[SectionRankUsers].Section_SectionID = SectionId) WHERE SectionId IN (SELECT i.Section_SectionId FROM inserted AS i)
+                                    UPDATE dbo.Sections SET FreeSpotsCount =  SpotsCount - (SELECT COUNT(*) FROM [dbo].[SectionRankUsers] WHERE [dbo].[SectionRankUsers].Section_SectionID = SectionId) WHERE SectionId IN (SELECT i.Section_SectionId FROM inserted AS i)
+                                END";
+            cmd.ExecuteNonQuery();
+
+            //2 Delete
+            cmd.CommandText = @"IF EXISTS (SELECT * FROM sys.triggers
+                                WHERE parent_class = 1 AND name = 'CalculateSpotsForDelete')
+                                DROP TRIGGER [dbo].[CalculateSpotsForDelete];";
+            cmd.ExecuteNonQuery();
+
+            
+            cmd.CommandText = @"CREATE TRIGGER [dbo].[CalculateSpotsForDelete]
+                                   ON  [dbo].[SectionRankUsers]
+                                   AFTER DELETE
+                                AS 
+                                BEGIN
+	                                SET NOCOUNT ON;
+	                                UPDATE dbo.Sections SET ParticipantsCount = (SELECT COUNT(*) FROM [dbo].[SectionRankUsers] WHERE [dbo].[SectionRankUsers].Section_SectionID = SectionId) WHERE SectionId IN (SELECT i.Section_SectionId FROM deleted AS i)
+                                    UPDATE dbo.Sections SET FreeSpotsCount =  SpotsCount - (SELECT COUNT(*) FROM [dbo].[SectionRankUsers] WHERE [dbo].[SectionRankUsers].Section_SectionID = SectionId) WHERE SectionId IN (SELECT i.Section_SectionId FROM deleted AS i)
+                                END";
+            cmd.ExecuteNonQuery();
         }
     }
 }

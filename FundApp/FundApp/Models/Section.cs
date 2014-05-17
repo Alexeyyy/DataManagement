@@ -12,19 +12,27 @@ namespace FundApp.Models
     {
         [Key]
         public int SectionID { get; set; }
+
         [Required]
         public string Title { get; set; }
+        
         [Required]
         public string Description { get; set; }
+        
         [Required]
         public DateTime StartLessonsTime { get; set; }
+        
         public int ParticipantsCount { get; set; }
+        
         public int SpotsCount { get; set; }
+        
         public int FreeSpotsCount { get; set; }
+        
         public int LessonsCount { get; set; }
 
         [Required]
         public virtual Ecologist Ecologist { get; set; }
+        
         public virtual ICollection<RankUser> Participants { get; set; }
 
         public void CalculateFreeSpots()

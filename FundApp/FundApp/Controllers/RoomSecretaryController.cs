@@ -86,11 +86,51 @@ namespace FundApp.Controllers
                 ViewBag.showCreateLink = false;
             else
                 ViewBag.showCreateLink = true;
-            
-            return View(db.Councils.ToList());
+
+            CouncilsProblems list = new CouncilsProblems();
+            list.listCouncils = db.Councils.ToList();
+            list.listProblems = (from problem in db.EcologicalProblems
+                                 select problem).ToList();
+
+            return View(list);
         }
 
-        //Удаление совета НЕ РАБОТАЕТ!
+        //Запрос на проблемы
+        [HttpGet]
+        public ActionResult GetCrucialProblems(string daysRange)
+        {
+            CouncilsProblems list = new CouncilsProblems();
+            list.listCouncils = db.Councils.ToList();
+            int days;
+
+            if (int.TryParse(daysRange, out days))
+            {
+                try
+                {
+                    list.listProblems = db.Database.SqlQuery<EcologicalProblem>("GetEcologicalProblems @days_range", new SqlParameter("days_range", days)).ToList();
+                    int l = list.listProblems.Count;
+                }
+                catch {
+                    list.listProblems = (from problem in db.EcologicalProblems
+                                         select problem).ToList();
+                }
+            }
+            else
+            {
+                list.listProblems = (from problem in db.EcologicalProblems
+                                     select problem).ToList();
+            }
+
+            //Скрывать ли ссылку создания совета или нет
+            if (db.Councils.ToList().Count == db.EcologicalProblems.ToList().Count)
+                ViewBag.showCreateLink = false;
+            else
+                ViewBag.showCreateLink = true;
+           
+            return View("Councils", list);
+        }
+
+        //Удаление совета
         public ActionResult DeleteCouncil(int councilID)
         {
             var council = db.Councils.Find(councilID);
@@ -240,7 +280,6 @@ namespace FundApp.Controllers
         //Удаление должника
         public ActionResult DeleteDebtor(int debtorID)
         {
-            //Debug.WriteLine(debtorID);
             var debtor = db.OrganisationDeptors.Find(debtorID);
 
             if (debtor != null)

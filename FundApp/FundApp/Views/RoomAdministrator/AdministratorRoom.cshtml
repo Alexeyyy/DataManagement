@@ -11,6 +11,12 @@
             <p>
                 В данном блоке администратору системы предлгается возможность управления данными пользователей системы
             </p>
+            <p>
+                Взрослые - @ViewBag.adultsQuantity
+            </p>
+            <p>
+                Дети - @ViewBag.childrenQuantity
+            </p>
             @Html.ActionLink("Перейти в раздел...", "SystemUsers", "RoomAdministrator", new { @class = "rank-link"})
         </td>
 

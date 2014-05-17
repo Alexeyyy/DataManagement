@@ -36,6 +36,11 @@ namespace FundApp.Controllers
                                                         || n.Ecologist.Name.Contains(searchString) || n.Ecologist.Surname.Contains(searchString) 
                                                         || n.Ecologist.FatherName.Contains(searchString) || n.LessonsCount == lessonsCount
                                                         || n.FreeSpotsCount == freeSpots || (n.StartLessonsTime.Year == d.Year && n.StartLessonsTime.Month == d.Month && n.StartLessonsTime.Day == d.Day))).ToList();
+            
+            //2
+            /*string query_section;
+            string query_ecologist;
+            List<Section> s = db.Sections.Where(n => n.Title.Contains(query_section) )  */
 
             return View("SectionsPage", sections);
         }

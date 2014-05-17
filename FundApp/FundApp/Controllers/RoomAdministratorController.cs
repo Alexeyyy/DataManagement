@@ -16,6 +16,12 @@ namespace FundApp.Controllers
 
         public ActionResult AdministratorRoom()
         {
+            var adults = db.Database.SqlQuery<int>("SELECT [dbo].[GetAdultsQuantity] ()").FirstOrDefault();
+            var children = db.Database.SqlQuery<int>("SELECT [dbo].[GetChildrenQuantity] ()").FirstOrDefault();
+
+            ViewBag.adultsQuantity = adults;
+            ViewBag.childrenQuantity = children;
+
             return View();
         }
 
@@ -26,6 +32,7 @@ namespace FundApp.Controllers
         {
             //Вернем всех пользователей, кроме администратора, а то не Дай Бог еще себя любимых удалим
             List<User> users = db.Users.Where(n => !(n is Administrator)).ToList();
+            
 
             return View(users);
         }
@@ -51,6 +58,28 @@ namespace FundApp.Controllers
         //Добавление нового пользователя
         public ActionResult AddNewUser() {
             return RedirectToAction("SignUpChoice", "Registration", null);
+        }
+
+        //Поиск по фамилии/имени/отчеству
+        [HttpGet]
+        public ActionResult SearchUser(string searchString)
+        {
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                var users = (from n in db.Users
+                             where (!(n is Administrator) && (n.Name.Contains(searchString) || n.Surname.Contains(searchString) || n.FatherName.Contains(searchString)))
+                             select n).ToList();
+
+                return View("SystemUsers", users);
+            }
+            else
+            {
+                var users = (from n in db.Users
+                             where (!(n is Administrator))
+                             select n).ToList();
+
+                return View("SystemUsers", users);
+            }
         }
 
         #endregion
@@ -217,7 +246,7 @@ namespace FundApp.Controllers
                 s.Ecologist = db.Ecologists.Find(ecologistID);
                 
                 //s.CalculateParticipantsCount();
-                s.CalculateFreeSpots();
+                //s.CalculateFreeSpots();
 
                 db.Sections.Add(s);
                 db.SaveChanges();

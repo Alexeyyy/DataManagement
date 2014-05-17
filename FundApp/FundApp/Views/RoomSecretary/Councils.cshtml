@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FundApp.Models.Council>
+﻿@model FundApp.Models.ViewModels.CouncilsProblems
 
 @{
     ViewBag.Title = "Councils";
@@ -7,7 +7,7 @@
 
 <h2>Экологические советы</h2>
 
-@if (Model.Count() != 0)
+@if (Model.listCouncils.Count() != 0)
 {
     <table class="table table-striped table-condensed table-hover data-table table-bordered">
         <thead>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var c in Model)
+            @foreach (var c in Model.listCouncils)
             {
                 <tr>
                     <td>
@@ -65,9 +65,55 @@
 else
 {
     <p>
-        В настоящее время заявок подано не было.
+        В настоящее не намечается ни одного совета.
     </p>
 }
+
+<h2>Список проблем</h2>
+
+<div class="search-block">
+     @using (Html.BeginForm("GetCrucialProblems", "RoomSecretary", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     {
+        @Html.TextBox("daysRange", null, new { @class = "form-control", placeholder = "Введите число дней..." })
+        <button type="submit" class="btn btn-default">Запрос</button>
+     }
+</div>
+
+@if (Model.listProblems.Count() != 0)
+{
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Дата публикации</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.listProblems)
+            {
+                <tr>
+                    <td>
+                        @c.Title
+                    </td>
+                    <td>
+                        @c.Description
+                    </td>
+                    <td>
+                        @c.PublicationDate.ToShortDateString()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>
+        Все проблемы либо рассматриваются, либо ваш запрос не дал результатов.
+    </p>
+}
+
 
 @*Отображаем в том случае если есть нерассмотренные проблемы*@
 @if(ViewBag.showCreateLink) {

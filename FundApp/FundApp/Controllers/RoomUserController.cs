@@ -56,8 +56,8 @@ namespace FundApp.Controllers
             var participant = db.RankUsers.Find(Session["SystemUserID"]);
                         
             section.Participants.Add(participant);
-            section.CalculateParticipantsCount();
-            section.CalculateFreeSpots();
+            //section.CalculateParticipantsCount();
+            //section.CalculateFreeSpots();
             TryUpdateModel<Section>(section);
             db.Entry<Section>(section).State = System.Data.EntityState.Modified;
 
@@ -73,8 +73,8 @@ namespace FundApp.Controllers
             var participant = db.RankUsers.Find(Session["SystemUserID"]);
 
             section.Participants.Remove(participant);
-            section.CalculateParticipantsCount();
-            section.CalculateFreeSpots();
+            //section.CalculateParticipantsCount();
+            //section.CalculateFreeSpots();
             TryUpdateModel<Section>(section);
             db.Entry<Section>(section).State = System.Data.EntityState.Modified;
 
