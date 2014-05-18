@@ -12,15 +12,18 @@ namespace FundApp.Models
         [Key]
         public int ComplaintID { get; set; }
 
-        [Required]
-        public DateTime AppearingDate { get; set; }
-        
-        [Required]
-        public string Description { get; set; }
-        
+        [Display(Name="Название жалобы")]
         [Required]
         public string Title { get; set; }
-        
+
+        [Display(Name = "Описание жалобы")]
+        [Required]
+        public string Description { get; set; }
+
+        [Display(Name = "Дата публикации жалобы")]
+        [Required]
+        public DateTime AppearingDate { get; set; }
+              
         public bool IsHidden { get; set; }
         
         [Required]

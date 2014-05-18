@@ -226,8 +226,8 @@ namespace FundApp.Migrations
             cmd.ExecuteNonQuery();
 
 
-            //Тригеры
-            //1 Insert
+            //Триггеры
+            //1 Рассчитывает число участников секции, количество свободных мест после регистрации
             cmd.CommandText = @"IF EXISTS (SELECT * FROM sys.triggers
                                 WHERE parent_class = 1 AND name = 'CalculateSpotsForInsert')
                                 DROP TRIGGER [dbo].[CalculateSpotsForInsert];";
@@ -244,7 +244,7 @@ namespace FundApp.Migrations
                                 END";
             cmd.ExecuteNonQuery();
 
-            //2 Delete
+            //2 Рассчитывает число участников секции, число свободных мест после дерегистрации
             cmd.CommandText = @"IF EXISTS (SELECT * FROM sys.triggers
                                 WHERE parent_class = 1 AND name = 'CalculateSpotsForDelete')
                                 DROP TRIGGER [dbo].[CalculateSpotsForDelete];";

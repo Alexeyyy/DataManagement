@@ -4,47 +4,49 @@
     ViewBag.Title = "EditNews";
 }
 
-<h2>Редактировать новость</h2>
+<h2 class="title">Редактировать новость</h2>
 
 @using (Html.BeginForm("EditNews", "RoomAdministrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Achievement</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.AchievementItem.AchievementID)
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.AchievementItem.Title)
         </div>
         
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AchievementItem.Title)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.AchievementItem.Title, new { @class="form-control", placeholder = "Название..." })
             @Html.ValidationMessageFor(model => model.AchievementItem.Title)
         </div>
         
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.AchievementItem.Description)
         </div>
         
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AchievementItem.Description)
+        <div class="editor-field form-item">
+            @Html.TextAreaFor(model => model.AchievementItem.Description, new { @class="form-control", placeholder = "Описание..." })
             @Html.ValidationMessageFor(model => model.AchievementItem.Description)
         </div>
 
-        <div>
+        <div class="form-item form-item-title">
             @Html.DisplayNameFor(model => model.ImageFile)
+        </div>
+        <div class="form-item">
             @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
         </div>
         
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" class="btn btn-default form-item" value="Сохранить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Вернуться", "SystemNewsCreation")
+    @Html.ActionLink("Вернуться", "SystemNewsCreation", null, new { @class = "btn btn-default form-item"})
 </div>
 

@@ -11,17 +11,25 @@ namespace FundApp.Models
     {
         [Key]
         public int ProblemID { get; set; }
+
+        [Display(Name="Название проблемы")]
+        [Required]
+        public string Title { get; set; }
+
+        [Display(Name = "Описание проблемы")]
         [Required]
         public string Description { get; set; }
 
         public string PhotoType { get; set; }
         public byte[] PhotoFile { get; set; }
 
+        [Display(Name = "Требуемая сумма")]
         public decimal RequiredSum { get; set; }
-        
+
+        [Display(Name = "Ход решения")]
         public bool IsSolved { get; set; }
-        [Required]
-        public string Title { get; set; }
+
+        [Display(Name = "Дата публикации проблемы")]
         [Required]
         public DateTime PublicationDate { get; set; }
 
@@ -31,6 +39,5 @@ namespace FundApp.Models
         public virtual Ecologist Creator { get; set; }
         
         public virtual Achievement Achievement { get; set; }
-
     }
 }

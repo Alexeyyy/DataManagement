@@ -2,7 +2,7 @@
     ViewBag.Title = "AdministratorRoom";
 }
 
-<h2>Администраторская</h2>
+<h2 class="title">Администраторская</h2>
 
 <table class="choice-group">
     <tr>
@@ -12,12 +12,15 @@
                 В данном блоке администратору системы предлгается возможность управления данными пользователей системы
             </p>
             <p>
+                Сейчас зарегистрированы:
+            </p>
+            <p>
                 Взрослые - @ViewBag.adultsQuantity
             </p>
             <p>
                 Дети - @ViewBag.childrenQuantity
             </p>
-            @Html.ActionLink("Перейти в раздел...", "SystemUsers", "RoomAdministrator", new { @class = "rank-link"})
+            @Html.ActionLink("Перейти в раздел...", "SystemUsers", "RoomAdministrator", new { @class = "btn btn-default"})
         </td>
 
         <td class="choice-item">
@@ -27,7 +30,7 @@
             <p>
                 В данном блоке администратору системы предлагается возможность добавления новостей о достижениях фонда
             </p>
-            @Html.ActionLink("Перейти в раздел...", "SystemNewsCreation", "RoomAdministrator", new { @class = "rank-link"})
+            @Html.ActionLink("Перейти в раздел...", "SystemNewsCreation", "RoomAdministrator", new { @class = "btn btn-default"})
         </td>
 
         <td class="choice-item">
@@ -37,7 +40,7 @@
             <p>
                 В данном блоке администратору системы предлагается возможность добавления новостей о достижениях фонда
             </p>
-            @Html.ActionLink("Перейти в раздел...", "SystemSections", "RoomAdministrator", new { @class = "rank-link"})
+            @Html.ActionLink("Перейти в раздел...", "SystemSections", "RoomAdministrator", new { @class = "btn btn-default"})
         </td>
     </tr>
 </table>

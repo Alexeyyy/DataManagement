@@ -157,6 +157,9 @@ namespace FundApp.Controllers
                 achievement.PhotoFile = image.GetBytes();
             }
 
+            achievement.Title = a.AchievementItem.Title;
+            achievement.Description = a.AchievementItem.Description;
+
             TryUpdateModel<Achievement>(achievement);
             db.Entry<Achievement>(achievement).State = System.Data.EntityState.Modified;
             db.SaveChanges();
@@ -246,7 +249,7 @@ namespace FundApp.Controllers
                 s.Ecologist = db.Ecologists.Find(ecologistID);
                 
                 //s.CalculateParticipantsCount();
-                //s.CalculateFreeSpots();
+                s.CalculateFreeSpots();
 
                 db.Sections.Add(s);
                 db.SaveChanges();

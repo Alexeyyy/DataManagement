@@ -4,42 +4,42 @@
     ViewBag.Title = "CreateNews";
 }
 
-<h2>CreateNews</h2>
+<h2 class="title">Создание новости</h2>
 
 @using (Html.BeginForm("CreateNews", "RoomAdministrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Hidden("ecologicalProblemID", (object)ViewBag.problemID)
-    @Html.ValidationSummary(false)
+    @*@Html.ValidationSummary(true)*@
 
     <fieldset>
-        <legend>Achievement</legend>
+        <legend></legend>
         
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AchievementItem.Title)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.AchievementItem.Title, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AchievementItem.Title)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.AchievementItem.Title, new { @class = "form-control", placeholder = "Название..."})
             @Html.ValidationMessageFor(model => model.AchievementItem.Title)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AchievementItem.Description)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.AchievementItem.Description, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AchievementItem.Description)
+        <div class="editor-field form-item">
+            @Html.TextAreaFor(model => model.AchievementItem.Description, new { @class = "form-control", placeholder = "Описание..."})
             @Html.ValidationMessageFor(model => model.AchievementItem.Description)
         </div>
 
-        <div>
-            @Html.DisplayNameFor(model => model.ImageFile)
-            @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
+        <div class="form-item">
+            @Html.LabelFor(model => model.ImageFile, new { @class = "form-item-title"})
+            @Html.TextBoxFor(model => model.ImageFile, new { type = "file",  id="exampleInputFile"})
         </div>
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" class="btn btn-default form-item" value="Создать" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Вернуться", "SystemNewsCreation")
+    @Html.ActionLink("Вернуться", "SystemNewsCreation", null, new { @class = "btn btn-default form-item"})
 </div>

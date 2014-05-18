@@ -5,7 +5,7 @@
 }
 
 
-<h2>Экологические советы</h2>
+<h2 class="title">Экологические советы</h2>
 
 @if (Model.listCouncils.Count() != 0)
 {
@@ -69,7 +69,7 @@ else
     </p>
 }
 
-<h2>Список проблем</h2>
+<h2 class="title">Список проблем</h2>
 
 <div class="search-block">
      @using (Html.BeginForm("GetCrucialProblems", "RoomSecretary", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
@@ -77,6 +77,9 @@ else
         @Html.TextBox("daysRange", null, new { @class = "form-control", placeholder = "Введите число дней..." })
         <button type="submit" class="btn btn-default">Запрос</button>
      }
+</div>
+
+<div class="clear">
 </div>
 
 @if (Model.listProblems.Count() != 0)
@@ -110,16 +113,16 @@ else
 else
 {
     <p>
-        Все проблемы либо рассматриваются, либо ваш запрос не дал результатов.
+        Ваш запрос не дал результатов.
     </p>
 }
 
 
 @*Отображаем в том случае если есть нерассмотренные проблемы*@
 @if(ViewBag.showCreateLink) {
-    @Html.ActionLink("Создать совет", "CreateCouncil")
+    @Html.ActionLink("Создать совет", "CreateCouncil", null, new { @class="btn btn-default"})
 } else {
     <p>
-        Все проблемы уже рассматриваются на советах!
+        Все проблемы уже рассматриваются на советах! В создании нового нет необходимости.
     </p>
 }

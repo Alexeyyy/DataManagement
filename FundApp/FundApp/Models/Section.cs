@@ -13,21 +13,28 @@ namespace FundApp.Models
         [Key]
         public int SectionID { get; set; }
 
+        [Display(Name = "Название секции")]
         [Required]
         public string Title { get; set; }
         
+        [Display(Name = "Описание секции")]
         [Required]
         public string Description { get; set; }
         
+        [Display(Name = "Время старта занятий")]
         [Required]
         public DateTime StartLessonsTime { get; set; }
         
+        [Display(Name = "Число участников")]
         public int ParticipantsCount { get; set; }
         
+        [Display(Name = "Число мест")]
         public int SpotsCount { get; set; }
         
+        [Display(Name="Число свободных мест")]
         public int FreeSpotsCount { get; set; }
         
+        [Display(Name="Число занятий")]
         public int LessonsCount { get; set; }
 
         [Required]

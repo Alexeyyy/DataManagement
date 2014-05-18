@@ -207,6 +207,7 @@ nav
 .gal-inf-p
 {
     margin: 15px 0;
+    font: normal 20px Arial serif;
 }
 
 .gal-inf-btn
@@ -219,9 +220,7 @@ nav
 .main-part
 {
     width: 1000px;
-    height: 400px;
     margin: 20px auto;
-    padding-bottom: 150px;
 }
 
 .fund-preview
@@ -271,7 +270,7 @@ nav
 .image-left
 {
     display: block;
-    padding: 20px;
+    padding: 10px;
     float: left;
 }
 
@@ -445,11 +444,27 @@ textarea
     margin-right: 5px;
 }
 
+.search-field
+{
+    margin-right: 10px;
+}
+
 /*====================Create,  edit styles====================*/
 h2.title
 {
     margin: 20px 0;
     font: bold 30px Arial serif;    
+}
+
+.form-item-title
+{
+    font: bold 20px Arial serif; 
+    margin: 5px 0;
+}
+
+.form-item
+{
+    margin: 10px 0;
 }
 
 /*==============Filter group==============*/
@@ -466,3 +481,24 @@ p.filter-p
 /*==============Filter group==============*/
 
 /*====================Create,  edit styles====================*/
+.inf
+{
+    font: normal 20px Arial serif;
+}
+
+    .inf p
+    {
+        text-indent: 1.5em;
+    }
+
+ul.enumeration
+{
+    list-style-type:disc;
+    margin: 15px;
+    padding-left: 25px;
+}
+
+ul.enumeration > li
+{
+    padding-bottom: 5px;
+}

@@ -9,7 +9,8 @@
 <div class="search-block">
      @using (Html.BeginForm("SearchSection", "Sections", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
      {
-        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
+        @Html.TextBox("ecologistName", null, new { @class = "form-control search-field", placeholder = "Эколог..." })
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Другое..." })
         <button type="submit" class="btn btn-default">Искать</button>
      }
 </div>

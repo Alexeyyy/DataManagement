@@ -4,72 +4,69 @@
     ViewBag.Title = "EditDebtor";
 }
 
-<h2>EditDebtor</h2>
+<h2 class="title">Редактирование должника</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>OrganisationDeptor</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.OrganisationDeptorID)
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.Name)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.Name, new { @class="form-control", placeholder="ФИО/Название организации..."})
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.Reason)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Reason)
+        <div class="editor-field form-item">
+            @Html.TextAreaFor(model => model.Reason, new { @class="form-control", placeholder="Причина..."})
             @Html.ValidationMessageFor(model => model.Reason)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.FineAmount)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FineAmount)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.FineAmount, new { @class="form-control", placeholder="Сумма штрафа..."})
             @Html.ValidationMessageFor(model => model.FineAmount)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.PayTime)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PayTime)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.PayTime, new { @class="form-control", placeholder="Дата оплаты (dd.mm.yyyy)..."})
             @Html.ValidationMessageFor(model => model.PayTime)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.IsPayed)
         </div>
-        <div class="editor-field">
+        <div class="editor-field form-item">
             @Html.EditorFor(model => model.IsPayed)
             @Html.ValidationMessageFor(model => model.IsPayed)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             @Html.LabelFor(model => model.Email)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.Email, new { @class="form-control", placeholder="Адрес электронной почты..."})
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-
-        
-
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" class="btn btn-default form-item" value="Сохранить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться", "Debtors", null, new { @class="btn btn-default form-item" })
 </div>

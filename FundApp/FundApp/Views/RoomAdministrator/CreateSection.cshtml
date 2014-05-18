@@ -4,68 +4,66 @@
     ViewBag.Title = "CreateSection";
 }
 
-<h2>Создание секции</h2>
+<h2 class="title">Создание секции</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Section</legend>
+        <legend></legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.Title, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Название..."})
             @Html.ValidationMessageFor(model => model.Title)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.Description, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+        <div class="editor-field form-item">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Описание..."})
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartLessonsTime)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.StartLessonsTime, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StartLessonsTime)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.StartLessonsTime, new { @class = "form-control", placeholder = "Дата (dd.mm.yyyy)..."})
             @Html.ValidationMessageFor(model => model.StartLessonsTime)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SpotsCount)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.SpotsCount, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
+        <div class="editor-field form-item">
             @Html.EditorFor(model => model.SpotsCount)
             @Html.ValidationMessageFor(model => model.SpotsCount)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LessonsCount)
+        <div class="editor-label form-item">
+            @Html.LabelFor(model => model.LessonsCount, new { @class = "form-item-title"})
         </div>
-        <div class="editor-field">
+        <div class="editor-field form-item">
             @Html.EditorFor(model => model.LessonsCount)
             @Html.ValidationMessageFor(model => model.LessonsCount)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-item-title">
             Преподаватель
         </div>
-        <div class="editor-field">
+        <div class="editor-field form-item">
             @Html.DropDownList("ecologistID", (SelectListItem[])ViewBag.ecologists)  
         </div>
         
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <input type="submit" class="form-item btn btn-default" value="Создать" />
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Вернуться", "SystemSections")
+    @Html.ActionLink("Вернуться", "SystemSections", null, new { @class="btn btn-default form-item"})
 </div>
 

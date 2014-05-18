@@ -53,15 +53,20 @@ namespace FundApp.Controllers
         public ActionResult RegisterOnSection(int sectionID)
         {
             var section = db.Sections.Find(sectionID);
-            var participant = db.RankUsers.Find(Session["SystemUserID"]);
-                        
-            section.Participants.Add(participant);
-            //section.CalculateParticipantsCount();
-            //section.CalculateFreeSpots();
-            TryUpdateModel<Section>(section);
-            db.Entry<Section>(section).State = System.Data.EntityState.Modified;
 
-            db.SaveChanges();
+            //Если свободные местра еще есть
+            if (section.FreeSpotsCount > 0)
+            {
+                var participant = db.RankUsers.Find(Session["SystemUserID"]);
+
+                section.Participants.Add(participant);
+                //section.CalculateParticipantsCount();
+                //section.CalculateFreeSpots();
+                TryUpdateModel<Section>(section);
+                db.Entry<Section>(section).State = System.Data.EntityState.Modified;
+
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Sections");
         }

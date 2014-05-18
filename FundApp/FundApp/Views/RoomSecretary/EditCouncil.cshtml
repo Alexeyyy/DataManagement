@@ -4,63 +4,56 @@
     ViewBag.Title = "EditCouncil";
 }
 
-<h2>Редакитирование совета</h2>
+<h2 class="title">Редактирование совета</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Совет</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.CouncilID)
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-title-item">
             @Html.LabelFor(model => model.Title)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.Title, new { @class="form-control", placeholder="Название..."})
             @Html.ValidationMessageFor(model => model.Title)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-title-item">
             @Html.LabelFor(model => model.AssignmentDate)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AssignmentDate)
+        <div class="editor-field form-item">
+            @Html.TextBoxFor(model => model.AssignmentDate, new { @class="form-control", placeholder="Дата (dd.mm.yyyy)..."})
             @Html.ValidationMessageFor(model => model.AssignmentDate)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-title-item">
             @Html.LabelFor(model => model.CounsilResult)
         </div>
-        <div class="editor-field">
+        <div class="editor-field form-item">
             @Html.EditorFor(model => model.CounsilResult)
             @Html.ValidationMessageFor(model => model.CounsilResult)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label form-item form-title-item">
             @Html.LabelFor(model => model.Description)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+        <div class="editor-field form-item">
+            @Html.TextAreaFor(model => model.Description, new { @class="form-control", placeholder="Описание..."})
             @Html.ValidationMessageFor(model => model.Description)
         </div>
-
-        @*<div class="editor-label">
-            Проблема
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("problemID", (SelectListItem[])ViewBag.problems)  
-        </div>*@
 
         @Html.Hidden("problemID", (object)ViewBag.problemID, null)
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" class="form-item btn btn-default" value="Сохранить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Вернуться", "Councils")
+    @Html.ActionLink("Вернуться", "Councils", null, new { @class="form-item btn btn-default"})
 </div>

@@ -4,7 +4,7 @@
     ViewBag.Title = "SystemSections";
 }
 
-<h2>Экологические кружки</h2>
+<h2 class="title">Экологические кружки</h2>
 
 @if(Model.Count() != 0)
 {
@@ -45,4 +45,4 @@ else
     </p>
 }
 
-@Html.ActionLink("Создать экологическую секцию", "CreateSection", "RoomAdministrator")
+@Html.ActionLink("Создать экологическую секцию", "CreateSection", "RoomAdministrator", new { @class="btn btn-default" })
