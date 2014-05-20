@@ -82,6 +82,78 @@ namespace FundApp.Controllers
             }
         }
 
+        //Фильтрация
+        [HttpGet]
+        public ActionResult FilterUsers(string genderResult, string userType)
+        {
+            if (!string.IsNullOrEmpty(genderResult))
+            {
+                bool gender = Convert.ToBoolean(genderResult);
+
+                if (string.IsNullOrEmpty(userType))
+                {
+                    return View("SystemUsers", db.Users.Where(n => n.Sex == gender && !(n is Administrator)).ToList());
+                }
+                else
+                {
+                    if (userType == "Partners")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => (n.Sex == gender && (n is Partner))).ToList());
+                    }
+                    else if (userType == "Ecologists")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => (n.Sex == gender && (n is Ecologist))).ToList());
+                    }
+                    else if (userType == "RankUsers")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => (n.Sex == gender && (n is RankUser))).ToList());
+                    }
+                    else if (userType == "Secretaries")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => (n.Sex == gender && (n is Secretary))).ToList());
+                    }
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(userType))
+                {
+                    return View("SystemUsers", db.Users.Where(n => !(n is Administrator)).ToList());
+                }
+                else
+                {
+                    if (userType == "Partners")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => n is Partner).ToList());
+                    }
+                    else if (userType == "Ecologists")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => n is Ecologist).ToList());
+                    }
+                    else if (userType == "RankUsers")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => n is RankUser).ToList());
+                    }
+                    else if (userType == "Secretaries")
+                    {
+                        return View("SystemUsers", db.Users.Where(n => (n is Secretary)).ToList());
+                    }
+                }
+            }
+            //не добирется никогда, но мало ли)
+            return View("SystemUsers", db.Users.Where(n => !(n is Administrator)).ToList());
+        }
+
+        /*[HttpGet]
+        public ActionResult FilterPartners(string GenderResult)
+        {
+            if (!string.IsNullOrEmpty(GenderResult))
+                return View("SystemUsers", db.Users.Where(n => (n is Partner) && n.Sex == Convert.ToBoolean(GenderResult)).ToList());
+            else
+                return View("SystemUsers", db.Users.Where(n => (n is Partner)).ToList());
+        }*/
+
+
         #endregion
 
         #region Новости

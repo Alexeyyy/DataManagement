@@ -6,6 +6,18 @@
 
 <h2 class="title">Пользователи системы</h2>
 
+
+<div class = "filtration-form">
+    <p class ="filter-p">Фильтрация должников по состоянию уплаты штрафных санкций</p>
+    @using(Html.BeginForm("FilterUsers", "RoomAdministrator", FormMethod.Get)) {
+        <span>Выберите пол:</span>
+        @Html.DropDownList("GenderResult", new SelectListItem[] { new SelectListItem { Text = "Мужской", Selected = false, Value = Boolean.TrueString }, new SelectListItem { Text = "Женский", Selected = false, Value = Boolean.FalseString }, new SelectListItem{Text="Не указан", Selected=true, Value=""} }, new {@style = "normal 30px Arial serif" })  
+        <span>Выберите категорию:</span>
+        @Html.DropDownList("UserType", new SelectListItem[] { new SelectListItem { Text = "Партнеры", Selected = false, Value = "Partners" }, new SelectListItem { Text = "Секретари", Selected = false, Value = "Secretaries" }, new SelectListItem { Text = "Пользователи", Selected = false, Value = "RankUsers" }, new SelectListItem { Text = "Экологи", Selected = false, Value = "Ecologists" },new SelectListItem{Text="Не указан", Selected=true, Value=""} }, new {@style = "normal 30px Arial serif" })  
+        <button type="submit" class="btn btn-default">Фильтр</button>
+    }
+</div>
+
 <div class="search-block">
      @using (Html.BeginForm("SearchUser", "RoomAdministrator", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
      {
@@ -84,4 +96,5 @@
     </p>
 }
 
-@Html.ActionLink("Добавить нового пользователя", "AddNewUser", null, null)
+<br/>
+@Html.ActionLink("Добавить нового пользователя", "AddNewUser", null, new { @class="btn-default btn"})
