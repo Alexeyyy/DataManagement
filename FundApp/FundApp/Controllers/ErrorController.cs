@@ -22,10 +22,5 @@ namespace FundApp.Controllers
         {
             return View();
         }
-
-        public ActionResult ExhibitNotFound()
-        {
-            return View();
-        }
     }
 }

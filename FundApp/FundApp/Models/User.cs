@@ -83,6 +83,7 @@ namespace FundApp.Models
         public virtual ICollection<Achievement> Achievements { get; set; }
     }
 
+    [Table("Partners")]
     public class Partner : User
     {
         [Required(ErrorMessage = "Введите адрес компании")]

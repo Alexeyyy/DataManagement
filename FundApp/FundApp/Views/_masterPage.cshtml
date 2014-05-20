@@ -33,7 +33,7 @@
                     <p class="gal-inf-p">
                         Процесс уничтожения леса является актуальной проблемой во многих частях земного шара, поскольку влияет на их экологические, климатические и социально-экономические характеристики и снижает качество жизни. Обезлесение приводит к снижению биоразнообразия, запасов древесины, в том числе для промышленного использования, а также к усилению парникового эффекта из-за снижения объёмов фотосинтеза.
                     </p>
-                    
+
                     <div class="clear"></div>
                 </div>
             </div>
@@ -48,14 +48,14 @@
                     <p>
                         В молодых лесах, в которых много зелени, вероятность возгорания от молнии существенно ниже, чем в лесах возрастных, где много сухих и больных деревьев. Таким образом в природе ещё задолго до человека существовало своеобразное равновесие. Экологическая роль лесных пожаров заключалась в естественном обновлении лесов.
                     </p>
-                    
+
                     <div class="clear"></div>
                 </div>
             </div>
 
             <div class="top-gallery-item" style="background: url('/Images/gallery/pictures/picture_3_compr.jpg') no-repeat">
                 <div class="gallery-information">
-                    
+
                     <div class="clear"></div>
                 </div>
             </div>
@@ -94,23 +94,29 @@
             <header>
                 @if (Session["Role"] == null || Session["Role"] == "NotAllowed")
                 {
-                    using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+@*Была ли ошибка при вводе логина и пароля*@
+                    <table class="entrance-table">
+                        <tr>
+                            @if (Session["ErrorLogIn"] != null && Convert.ToBoolean(Session["ErrorLogin"].ToString()))
+                            {
+                                if (Convert.ToBoolean(Session["ErrorLogIn"].ToString()))
+                                {
+                                <td class="form-message-error">
+                                    Логин или пароль введены неверно!
+                                </td>
+                                }
+                            }
+                            else if (Session["Role"] == "NotAllowed")
+                            {
+                                <td class="form-message-error">
+                                    Отказано в доступе!
+                                </td>
+                            }
+                         
+                     <td class="authorization-form">       
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class= "navbar-form navbar-right" }))
                     {
                     <div class="form-group">
-                        @*Была ли ошибка при вводе логина и пароля*@
-                        @if(Session["ErrorLogIn"] != null && Convert.ToBoolean(Session["ErrorLogin"].ToString())) {
-                            if (Convert.ToBoolean(Session["ErrorLogIn"].ToString()))
-                            {
-                                <div class="form-message">
-                                    Логин или пароль введены неверно!
-                                </div>
-                            }
-                        }
-                        else if(Session["Role"] == "NotAllowed") {
-                                <div class="form-message">
-                                    Отказано в доступе!
-                                </div>
-                        }
                         <div class="sign-group">
                             @Html.TextBox("login", null, new { @class = "form-control", placeholder = "login" })
                             @Html.Password("password", null, new { @class = "form-control", placeholder = "password" })
@@ -119,14 +125,23 @@
                         </div>
                     </div>
                     }
+                         </td>
+                            </tr>
+                    </table>
+                     
                 }
-                else {
-                    <div class="form-group navbar-form navbar-right">
-                        <div class="form-message">
-                            @Session["Greeting"]
-                            @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "btn btn-default btn-exit" })
-                        </div>
-                    </div>
+                else
+                {
+                    <table class="exit-table">
+                        <tr>
+                            <td class="form-message-accepted">
+                                @Session["Greeting"]
+                            </td>
+                            <td class="exit-btn">
+                                @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "btn btn-default btn-exit" })
+                            </td>
+                        </tr>
+                    </table>
                 }
             </header>
 
@@ -139,50 +154,55 @@
                         <img src="~/Images/logos/logo_mini.png" />
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Партнеры", "PartnersPage", "Partners", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Партнеры", "PartnersPage", "Partners", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Экологи", "EcologistsPage", "Ecologists", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Экологи", "EcologistsPage", "Ecologists", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Проблемы", "ProblemsPage", "Problems", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Проблемы", "ProblemsPage", "Problems", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Просвящение", "SectionsPage", "Sections", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Просвещение", "SectionsPage", "Sections", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-li">
-                        @Html.ActionLink("Достижения", "AchievementsPage", "Achievements", null, new { @class = "nav-link"}) 
+                        @Html.ActionLink("Достижения", "AchievementsPage", "Achievements", null, new { @class = "nav-link" })
                     </li>
                     @*ЕСЛИ ПОЛЬЗОВАТЕЛЬ ЗАЛОГИНЕН ---- ОТКРЫВАЕМ ЕМУ ДОП. ФУНКЦИИ*@
-                    @if(Session["Role"] != null) {
-                        if (Session["Role"] == "Administrator") {
-                            <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link"}) 
-                            </li>
+                    @if (Session["Role"] != null)
+                    {
+                        if (Session["Role"] == "Administrator")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link" })
+                        </li>
                         }
-                        if (Session["Role"] == "Secretary") {
-                            <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "SecretaryRoom", "RoomSecretary", null, new { @class = "nav-link"}) 
-                            </li>
+                        if (Session["Role"] == "Secretary")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "SecretaryRoom", "RoomSecretary", null, new { @class = "nav-link" })
+                        </li>
                         }
-                        if (Session["Role"] == "Ecologist") {
-                            <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "EcologistRoom", "RoomEcologist", null, new { @class = "nav-link"}) 
-                            </li>
+                        if (Session["Role"] == "Ecologist")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "EcologistRoom", "RoomEcologist", null, new { @class = "nav-link" })
+                        </li>
                         }
-                        if (Session["Role"] == "User") {
-                            <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "UserRoom", "RoomUser", null, new { @class = "nav-link"}) 
-                            </li>
+                        if (Session["Role"] == "User")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "UserRoom", "RoomUser", null, new { @class = "nav-link" })
+                        </li>
                         }
                         if (Session["Role"] == "Partner")
                         {
-                            <li class="nav-li">
-                                @Html.ActionLink("Кабинет", "PartnerRoom", "RoomPartner", null, new { @class = "nav-link"}) 
-                            </li>
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "PartnerRoom", "RoomPartner", null, new { @class = "nav-link" })
+                        </li>
                         }
                     }
                 </ul>

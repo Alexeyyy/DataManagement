@@ -49,7 +49,7 @@ namespace FundApp.Models
 
         public void CalculateParticipantsCount()
         {
-            if (Participants.Count != null)
+            if (Participants != null)
                 ParticipantsCount = Participants.Count();
             else
                 ParticipantsCount = 0;
