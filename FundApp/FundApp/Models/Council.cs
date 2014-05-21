@@ -12,18 +12,23 @@ namespace FundApp.Models
         [Key]
         public int CouncilID { get; set; }
         
+        [Display(Name="Название совета")]
         [Required]
         public string Title { get; set; }
         
+        [Display(Name="Дата проведения")]
         [Required]
         public DateTime AssignmentDate { get; set; }
-        
+
+        [Display(Name = "Результат совета")]
         [Required]
         public bool CounsilResult { get; set; }
-        
+
+        [Display(Name = "Описание")]
         [Required]
         public string Description { get; set; }
 
+        [Display(Name = "Экологическая проблема")]
         [Required]
         public virtual EcologicalProblem Problem { get; set; }
         

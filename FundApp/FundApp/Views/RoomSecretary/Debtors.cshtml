@@ -85,7 +85,15 @@ else
                     <td>@d.Reason</td>
                     <td>@d.PayTime</td>
                     <td>@d.FineAmount</td>
-                    <td>@d.IsPayed</td>
+                    <td>
+                        @if (d.IsPayed)
+                        {
+                            <span>Штраф выплачен</span>
+                        }
+                        else {
+                            <span>Штраф не выплачен</span>
+                        }
+                    </td>
                     <td>@Html.ActionLink("Редактировать", "EditDebtor", new {debtorID = d.OrganisationDeptorID}, null)</td>
                     <td>@Html.ActionLink("Удаление", "DeleteDebtor", new {debtorID = d.OrganisationDeptorID}, null)</td>
                 </tr>

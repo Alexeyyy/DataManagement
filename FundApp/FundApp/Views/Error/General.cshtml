@@ -3,4 +3,16 @@
     ViewBag.Title = "General";
 }
 
-<h2>@Model.Message</h2>
+<h2 class="title">Произошла ошибка. Перейдите на главную или другую страницу страницу</h2>
+
+<div class="error">
+    <p>
+        Информация об ошибке направлена администратору системы
+    </p>
+    <p>
+        Данные об ошибке:
+    </p>
+    <div class="error-box">
+        @Model.Message
+    </div>
+</div>

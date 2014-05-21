@@ -554,3 +554,16 @@ ul.enumeration > li
 {
     padding-bottom: 5px;
 }
+
+.error > p
+{
+    font: normal 20px Arial serif;
+    margin: 5px; 
+}
+
+.error-box
+{
+    font: normal 20px Arial serif; 
+    background: #ffd782;
+    padding: 10px;
+}

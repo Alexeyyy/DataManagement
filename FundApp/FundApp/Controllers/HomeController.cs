@@ -11,8 +11,6 @@ namespace FundApp.Controllers
 {
     public class HomeController : Controller
     {
-        FundContext db = new FundContext();
-
         public ActionResult Index()
         {
             return View();
