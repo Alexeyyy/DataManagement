@@ -56,15 +56,25 @@ namespace FundApp.Migrations
 
             db.RankUsers.AddOrUpdate(
                 n => n.Surname,
-                new RankUser{Name = "Равиль", Surname = "Альмяшев", FatherName = "Камилевич", Sex = true, BirthDate = DateTime.Now.AddYears(-19), RegistrationDate = DateTime.Now, Login = "ravil", Password = "lalka", Email = "zagaichuk@yandex.ru", Information = "Я простой юзер!"},
-                new RankUser{Name = "Петр", Surname = "Сергеев", FatherName = "Сергеевич", Sex = true, BirthDate = DateTime.Now.AddYears(-19), RegistrationDate = DateTime.Now, Login = "serg", Password = "serg", Email = "zagaichuk@yandex.ru", Information = "Я простой юзер!"}
+                new RankUser{Name = "Равиль", Surname = "Альмяшев", FatherName = "Камилевич", Sex = true, BirthDate = DateTime.Now.AddYears(-19), RegistrationDate = DateTime.Now, Login = "ravil", Password = "12345", Email = "zagaichuk@yandex.ru", Information = "Я простой юзер!"},
+                new RankUser{Name = "Петр", Surname = "Сергеев", FatherName = "Сергеевич", Sex = true, BirthDate = DateTime.Now.AddYears(-19), RegistrationDate = DateTime.Now, Login = "serg", Password = "12345", Email = "sergeev_piotr@yandex.ru", Information = "Я простой пользователь!"},
+                new RankUser{Name = "Игорь", Surname = "Александров", FatherName = "Игоревич", Sex = true, BirthDate = DateTime.Now.AddYears(-12), RegistrationDate = DateTime.Now, Login = "igor", Password = "12345", Email = "mail1@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Иван", Surname = "Волынов", FatherName = "Пантелеевич", Sex = true, BirthDate = DateTime.Now.AddYears(-14), RegistrationDate = DateTime.Now, Login = "volina", Password = "12345", Email = "mail2@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Камиль", Surname = "Валиуллов", FatherName = "Акимович", Sex = true, BirthDate = DateTime.Now.AddYears(-15), RegistrationDate = DateTime.Now, Login = "valiullov", Password = "12345", Email = "mail3@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Олег", Surname = "Седов", FatherName = "Моисеевич", Sex = true, BirthDate = DateTime.Now.AddYears(-13), RegistrationDate = DateTime.Now, Login = "sedov", Password = "12345", Email = "mail4@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Виктор", Surname = "Князев", FatherName = "Валерьевич", Sex = true, BirthDate = DateTime.Now.AddYears(-9), RegistrationDate = DateTime.Now, Login = "kniazev", Password = "12345", Email = "mail5@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Вадим", Surname = "Карайченцев", FatherName = "Иванович", Sex = true, BirthDate = DateTime.Now.AddYears(-20), RegistrationDate = DateTime.Now, Login = "caraichencev", Password = "12345", Email = "mail6@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Зоя", Surname = "Царева", FatherName = "Алексеевна", Sex = false, BirthDate = DateTime.Now.AddYears(-43), RegistrationDate = DateTime.Now, Login = "careva", Password = "12345", Email = "mail7@yandex.ru", Information = "Я пользователь!"},
+                new RankUser{Name = "Иван", Surname = "Павлов", FatherName = "Игоревич", Sex = true, BirthDate = DateTime.Now.AddYears(-54), RegistrationDate = DateTime.Now, Login = "pavlov", Password = "12345", Email = "mail8@yandex.ru", Information = "Я пользователь!"}
                 );
 
             db.SaveChanges();
 
             db.Partners.AddOrUpdate(
                 n => n.CompanyName,
-                new Partner { Name = "Анна", Surname = "Голобокова", FatherName = "Андреевна", Sex = false, Email = "golobokova_ann@gmail.ru", Login = "ann", Password = "ann", BirthDate = DateTime.Now.AddYears(-20), RegistrationDate = DateTime.Now, CompanyName = "AnnCompanyGroup", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе.", Reason = "Хотим сделать мир лучше. Мы очень богатые", IsSolved = true, Secretary = db.Secretaries.First(n => n.Surname == "Прохоров") }
+                new Partner { Name = "Анна", Surname = "Голобокова", FatherName = "Андреевна", Sex = false, Email = "golobokova_ann@gmail.ru", Login = "ann", Password = "ann", BirthDate = DateTime.Now.AddYears(-20), RegistrationDate = DateTime.Now, CompanyName = "AnnCompanyGroup", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе.", Reason = "Хотим сделать мир лучше. Мы очень богатые", IsSolved = true, Secretary = db.Secretaries.First(n => n.Surname == "Прохоров")},
+                new Partner { Name = "Василий", Surname = "Гапонов", FatherName = "Леонидович", Sex = true, Email = "gaponov@gmail.ru", Login = "gaponov", Password = "12345", BirthDate = DateTime.Now.AddYears(-25), RegistrationDate = DateTime.Now, CompanyName = "GaponovCompany", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе.", Reason = "Хотим сделать мир лучше. Мы очень богатые", IsSolved = false, Secretary = db.Secretaries.First(n => n.Surname == "Прохоров") },
+                new Partner { Name = "Александр", Surname = "Романов", FatherName = "Николаевич", Sex = true, Email = "romanov@gmail.ru", Login = "romanov", Password = "12345", BirthDate = DateTime.Now.AddYears(-19), RegistrationDate = DateTime.Now, CompanyName = "GaponovCompany", Address = "Ульяновск", Description = "Мы компания, занимающаяся помощью природе.", Reason = "Хотим сделать мир лучше. Мы очень богатые", IsSolved = false, Secretary = db.Secretaries.First(n => n.Surname == "Прохоров") }
             );
 
             db.SaveChanges();
@@ -75,7 +85,11 @@ namespace FundApp.Migrations
                 new Complaint { Title = "Загрязнение озера Байкал", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = true },
                 new Complaint { Title = "Лесные пожары на Алтае", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = true },
                 new Complaint { Title = "Выбросы в атмосферу на Кавказе", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = false },
-                new Complaint { Title = "Лесные пожары в Сибири", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = true }
+                new Complaint { Title = "Лесные пожары в Сибири", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = true },
+                new Complaint { Title = "Загрязнение Оки", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = false },
+                new Complaint { Title = "Выбросы BP в Мексиканский залив", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = false },
+                new Complaint { Title = "Загрязнение Волги", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = false },
+                new Complaint { Title = "Лесной пожар в Калифорнии", Creator = db.Ecologists.First(), AppearingDate = DateTime.Now, Description = "Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на латинице с начала XVI века.", IsHidden = false }
             );
 
             db.SaveChanges();
@@ -94,7 +108,12 @@ namespace FundApp.Migrations
                 n => n.Title,
                 new Section { Title = "Общий курс экологии. Часть 1.", SpotsCount = 40, StartLessonsTime = DateTime.Now.AddDays(5), Ecologist = db.Ecologists.First(n => n.Surname == "Загайчук"), Description = "Очень интересеный курс. Подойдет для тех кто только начинается знакомиться с экологией. Ведет просто замечательный преподаватель", LessonsCount = 15, Participants = db.RankUsers.ToList() },
                 new Section { Title = "Общий курс экологии. Часть 2.", SpotsCount = 20, StartLessonsTime = DateTime.Now.AddDays(10), Ecologist = db.Ecologists.First(n => n.Surname == "Харитонов"), Description = "Очень интересеный курс. Продолжение предыдущего курса. Подойдет для продвинутых пользователей. Ведет также просто замечательный преподаватель", LessonsCount = 10 },
-                new Section { Title = "Общий курс экологии. Часть 3.", SpotsCount = 15, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.First(), Description = "Очень интересеный курс. Продолжение предыдущего курса. Подойдет для супер-продвинутых пользователей. Ведет также просто замечательный преподаватель", LessonsCount = 5 }
+                new Section { Title = "Общий курс экологии. Часть 3.", SpotsCount = 15, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.First(), Description = "Очень интересеный курс. Продолжение предыдущего курса. Подойдет для супер-продвинутых пользователей. Ведет также просто замечательный преподаватель", LessonsCount = 5 },
+                new Section { Title = "Стихии", SpotsCount = 25, StartLessonsTime = DateTime.Now.AddDays(180), Ecologist = db.Ecologists.ToList()[1], Description = "Очень интересеный курс. Продолжение предыдущего курса. Подойдет для супер-продвинутых пользователей. Ведет также просто замечательный преподаватель", LessonsCount = 5 },
+                new Section { Title = "Метеорология", SpotsCount = 30, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.ToList()[3], Description = "Очень интересный курс.", LessonsCount = 5 },
+                new Section { Title = "Загрязнение и люди", SpotsCount = 40, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.ToList()[2], Description = "Очень интересный курс.", LessonsCount = 25 },
+                new Section { Title = "Кто мы?", SpotsCount = 10, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.ToList()[1], Description = "Очень интересный курс.", LessonsCount = 35 },
+                new Section { Title = "Роль человека в окружающей среде.", SpotsCount = 15, StartLessonsTime = DateTime.Now.AddDays(15), Ecologist = db.Ecologists.ToList()[1], Description = "Очень интересный курс.", LessonsCount = 15 }
             );
 
             db.SaveChanges();
@@ -116,12 +135,12 @@ namespace FundApp.Migrations
 
             db.SaveChanges();
 
-            db.Complaints.AddOrUpdate(
+            /*db.Complaints.AddOrUpdate(
                 n => n.Title,
                 new Complaint { Title = "Жалоба1", AppearingDate = DateTime.Now, Creator = db.Ecologists.First(), Description = "description1111", IsHidden = false }
             );
 
-            db.SaveChanges();
+            db.SaveChanges();*/
 
             db.Councils.AddOrUpdate(
                 n => n.Title,

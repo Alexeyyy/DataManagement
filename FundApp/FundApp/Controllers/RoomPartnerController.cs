@@ -14,14 +14,20 @@ namespace FundApp.Controllers
 
         public ActionResult PartnerRoom()
         {
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Partner")
+                return View();
+            else
+                return RedirectToAction("Http403", "Error");
         }
-        
+
         //Создание жалобы
         [HttpGet]
         public ActionResult CreateComplaint()
         {
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Partner")
+                return View();
+            else
+                return RedirectToAction("Http403", "Error");
         }
 
         [HttpPost]

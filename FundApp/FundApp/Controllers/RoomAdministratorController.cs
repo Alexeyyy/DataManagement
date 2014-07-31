@@ -16,13 +16,18 @@ namespace FundApp.Controllers
 
         public ActionResult AdministratorRoom()
         {
-            var adults = db.Database.SqlQuery<int>("SELECT [dbo].[GetAdultsQuantity] ()").FirstOrDefault();
-            var children = db.Database.SqlQuery<int>("SELECT [dbo].[GetChildrenQuantity] ()").FirstOrDefault();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                var adults = db.Database.SqlQuery<int>("SELECT [dbo].[GetAdultsQuantity] ()").FirstOrDefault();
+                var children = db.Database.SqlQuery<int>("SELECT [dbo].[GetChildrenQuantity] ()").FirstOrDefault();
 
-            ViewBag.adultsQuantity = adults;
-            ViewBag.childrenQuantity = children;
+                ViewBag.adultsQuantity = adults;
+                ViewBag.childrenQuantity = children;
 
-            return View();
+                return View();
+            }
+            else
+                return RedirectToAction("Http403", "Error", null);
         }
 
         #region Работа с пользователями
@@ -30,13 +35,17 @@ namespace FundApp.Controllers
         //Отображение страницы со списком пользователей
         public ActionResult SystemUsers()
         {
-            //Вернем всех пользователей, кроме администратора, а то не Дай Бог еще себя любимых удалим
-            List<User> users = db.Users.Where(n => !(n is Administrator)).ToList();
-            
-
-            return View(users);
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                //Вернем всех пользователей, кроме администратора, а то не Дай Бог еще себя любимых удалим
+                List<User> users = db.Users.Where(n => !(n is Administrator)).ToList();
+                
+                return View(users);
+            }
+            else
+                return RedirectToAction("Http403", "Error", null);
         }
-
+         
         //Удаление пользователя 
         public ActionResult DeleteUser(int id)
         {
@@ -57,7 +66,10 @@ namespace FundApp.Controllers
 
         //Добавление нового пользователя
         public ActionResult AddNewUser() {
-            return RedirectToAction("SignUpChoice", "Registration", null);
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+                return RedirectToAction("SignUpChoice", "Registration", null);
+            else
+                return RedirectToAction("Http403", "Error", null);
         }
 
         //Поиск по фамилии/имени/отчеству
@@ -161,14 +173,23 @@ namespace FundApp.Controllers
         //Отображение
         public ActionResult CreateNews(int id)
         {
-            ViewBag.problemID = id;
-
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                ViewBag.problemID = id;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error", null);    
+            }
         }
 
         public ActionResult SystemNewsCreation()
         {
-            return View(db.EcologicalProblems.ToList());
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+                return View(db.EcologicalProblems.ToList());
+            else
+                return RedirectToAction("Http403", "Error", null);    
         }
 
         //Создаем новость
@@ -209,10 +230,15 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult EditNews(int id)
         {
-            AddAchievement item = new AddAchievement();
-            item.AchievementItem = db.Achivements.Find(id);
-            
-            return View(item);
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                AddAchievement item = new AddAchievement();
+                item.AchievementItem = db.Achivements.Find(id);
+
+                return View(item);
+            }
+            else
+                return RedirectToAction("Http403", "Error", null);    
         }
                 
         [HttpPost]
@@ -283,7 +309,10 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult SystemSections()
         {
-            return View(db.Sections.ToList());
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+                return View(db.Sections.ToList());
+            else
+                return RedirectToAction("Http403", "Error", null);     
         }
 
         private SelectListItem[] GetEcologistsSurnames(int id)
@@ -306,9 +335,15 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult CreateSection()
         {
-            ViewBag.ecologists = GetEcologistsSurnames(1); //при создании первый эколог будет выбран по умолчанию  
-
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                ViewBag.ecologists = GetEcologistsSurnames(1); //при создании первый эколог будет выбран по умолчанию  
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error", null);     
+            }
         }
         
         [HttpPost]
@@ -352,10 +387,17 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult EditSection(int sectionID)
         {
-            int ecologistID = db.Sections.Find(sectionID).Ecologist.ID;
-            ViewBag.ecologists = GetEcologistsSurnames(ecologistID);
-            
-            return View(db.Sections.Find(sectionID));
+            if (Session["Role"] != null && Session["Role"].ToString() == "Administrator")
+            {
+                int ecologistID = db.Sections.Find(sectionID).Ecologist.ID;
+                ViewBag.ecologists = GetEcologistsSurnames(ecologistID);
+
+                return View(db.Sections.Find(sectionID));
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error", null);     
+            }
         }
 
         [HttpPost]

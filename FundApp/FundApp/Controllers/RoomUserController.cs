@@ -13,15 +13,21 @@ namespace FundApp.Controllers
 
         public ActionResult UserRoom()
         {
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "User")
+                return View();
+            else
+                return RedirectToAction("Http403", "Error");
         }
 
         #region Жалоба
-        
+
         [HttpGet]
         public ActionResult Complaint()
         {
-            return View();    
+            if (Session["Role"] != null && Session["Role"].ToString() == "User")
+                return View();
+            else
+                return RedirectToAction("Http403", "Error");
         }
 
         //создание и отправка жалобы
@@ -43,10 +49,15 @@ namespace FundApp.Controllers
 
         public ActionResult Sections()
         {
-            List<Section> sections = db.Sections.ToList();
-            ViewBag.participant = db.RankUsers.Find(Session["SystemUserID"]);
-            
-            return View(sections);
+            if (Session["Role"] != null && Session["Role"].ToString() == "User")
+            {
+                List<Section> sections = db.Sections.ToList();
+                ViewBag.participant = db.RankUsers.Find(Session["SystemUserID"]);
+
+                return View(sections);
+            }
+            else
+                return RedirectToAction("Http403", "Error");
         }
 
         //регистрация на курсы

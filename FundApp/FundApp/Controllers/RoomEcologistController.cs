@@ -14,29 +14,50 @@ namespace FundApp.Controllers
 
         public ActionResult EcologistRoom()
         {
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Ecologist")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error");
+            }
         }
 
         #region Жалобы пользователей
 
         public ActionResult Complaints()
         {
-            List<Complaint> complaints = db.Complaints.Where(n => n.IsHidden == false).ToList(); //вернем только те жалобы, которым еще не были рассмотрены 
-            return View(complaints);
+            if (Session["Role"] != null && Session["Role"].ToString() == "Ecologist")
+            {
+                List<Complaint> complaints = db.Complaints.Where(n => n.IsHidden == false).ToList(); //вернем только те жалобы, которым еще не были рассмотрены 
+                return View(complaints);
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error");
+            }
         }
 
         //Создание проблемы на базе жалобы
         [HttpGet]
         public ActionResult CreateProblem(int complaintID)
         {
-            ViewBag.complaintID = complaintID;
-            return View();
+            if (Session["Role"] != null && Session["Role"].ToString() == "Ecologist")
+            {
+                ViewBag.complaintID = complaintID;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error");
+            }
         }
 
         [HttpPost]
         public ActionResult CreateProblem(EcologicalProblem problem, int complaintID)
         {
-            Debug.WriteLine(complaintID);
+            //Debug.WriteLine(complaintID);
             try
             {
                 //одновременно "отклоняем" жалобу
@@ -62,7 +83,7 @@ namespace FundApp.Controllers
         //Отклонение жалобы
         public ActionResult DeclineComplaint(int complaintID)
         {
-            Debug.WriteLine(complaintID);
+            //Debug.WriteLine(complaintID);
             var complaint = db.Complaints.Find(complaintID);
 
             if (complaint != null)
@@ -80,7 +101,14 @@ namespace FundApp.Controllers
         [HttpGet]
         public ActionResult CreateComplaint()
         {
-            return View(); 
+            if (Session["Role"] != null && Session["Role"].ToString() == "Ecologist")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error");
+            }
         }
 
         [HttpPost]
@@ -103,10 +131,17 @@ namespace FundApp.Controllers
         
         public ActionResult Councils()
         {
-            List<Council> councils = db.Councils.ToList();
-            ViewBag.ecologist = db.Ecologists.Find(Session["SystemUserID"]);
+            if (Session["Role"] != null && Session["Role"].ToString() == "Ecologist")
+            {
+                List<Council> councils = db.Councils.ToList();
+                ViewBag.ecologist = db.Ecologists.Find(Session["SystemUserID"]);
 
-            return View(councils);
+                return View(councils);
+            }
+            else
+            {
+                return RedirectToAction("Http403", "Error");
+            }
         }
 
         //регистрация на совет 
